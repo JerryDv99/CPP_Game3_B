@@ -1,0 +1,22 @@
+#pragma once
+#include "Object.h"
+
+class Player : public Object
+{
+private:
+	string Texture[8];
+	int Index;
+	bool Temp;
+	int T;
+public:
+	virtual Object* Start(string _Key)override;
+	virtual int Update()override;
+	virtual void Render()override;
+	virtual void Release()override;
+	virtual Object* Clone()override { return new Player(*this); }
+public:
+	Player();
+	Player(Transform _Info) : Object(_Info) {};
+	virtual ~Player();
+};
+
