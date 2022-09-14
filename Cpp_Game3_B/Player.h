@@ -15,6 +15,9 @@ public:
 	virtual void Release()override;
 	virtual Object* Clone()override { return new Player(*this); }
 public:
+	void SetIndex(int _Index) { Index = _Index; }
+	float GetSpeed() { return Speed; }
+public:
 	Player();
 	Player(Transform _Info) : Object(_Info) {};
 	virtual ~Player();

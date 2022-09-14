@@ -2,6 +2,7 @@
 
 #include"Player.h"
 #include"Enemy.h"
+#include"BackGround.h"
 
 PrototypeManager* PrototypeManager::Instance = nullptr;
 
@@ -29,6 +30,9 @@ void PrototypeManager::Initialize()
 
 	Key = "Player";
 	ObjectList[Key] = (new Player(Info))->Start(Key);
+
+	Key = "BackGround";
+	ObjectList[Key] = (new BackGround(Info))->Start(Key);
 }
 
 Object* PrototypeManager::FindObject(string _Key)

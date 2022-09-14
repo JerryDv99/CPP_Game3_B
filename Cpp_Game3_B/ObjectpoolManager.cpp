@@ -63,6 +63,21 @@ void ObjectpoolManager::SwitchingObject(string _Key, Vector3 _Position)
 
 void ObjectpoolManager::Update()
 {
+	for (auto iter = EnableList.begin(); iter != EnableList.end(); ++iter)
+	{
+		for (auto iter2 = iter->second.begin(); iter2 != iter->second.end();)
+		{
+			int Result = (*iter2)->Update();
+
+			if (Result)
+			{
+				DisableList[(*iter2)->GetKey()].push_back(*iter2);
+				iter2 = iter->second.erase(iter2);
+			}
+			else
+				++iter2;
+		}
+	}
 }
 
 void ObjectpoolManager::Render()

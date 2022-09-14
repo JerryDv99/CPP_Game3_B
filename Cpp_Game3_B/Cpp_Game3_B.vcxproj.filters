@@ -79,9 +79,6 @@
     <Filter Include="소스 파일\1.Object\Non-PB">
       <UniqueIdentifier>{1b1734b9-45c6-4a02-91c3-f7455c346e9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\1.Object\Non-PB\Item">
-      <UniqueIdentifier>{aedb7b81-7cf0-436b-b041-36c6d7e6e6d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\1.Object\Non-PB\Junk">
       <UniqueIdentifier>{5961c805-c73c-436e-afa6-c5673a43a92e}</UniqueIdentifier>
     </Filter>
@@ -109,18 +106,6 @@
     <Filter Include="소스 파일\1.Object\Non-PB\Citizen\CtzBridge\CtzVan">
       <UniqueIdentifier>{d70079cd-b362-4783-be60-42234c7ec175}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\1.Object\Non-PB\Item\ItemBridge">
-      <UniqueIdentifier>{9961eefd-f930-49e0-9454-cc6bfcbdaed5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\1.Object\Non-PB\Item\ItemBridge\Bulletproof">
-      <UniqueIdentifier>{d7ad36ec-14b5-4e9e-8271-cf91c288dab3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\1.Object\Non-PB\Item\ItemBridge\RepairTool">
-      <UniqueIdentifier>{46144054-9373-40f1-94a9-7340b4214b57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\1.Object\Non-PB\Item\ItemBridge\PowerUp">
-      <UniqueIdentifier>{6d3630fb-7ebd-4365-b221-fc040403a2bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\1.Object\Skill">
       <UniqueIdentifier>{255dba5a-1bf1-4c17-b6cb-6d2c35ffc148}</UniqueIdentifier>
     </Filter>
@@ -129,6 +114,48 @@
     </Filter>
     <Filter Include="소스 파일\1.Object\Skill\SpikeStrip">
       <UniqueIdentifier>{4dac3541-e695-48ae-a996-e40db8e507e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\9.Manager\CollisionManager">
+      <UniqueIdentifier>{4921cd17-8dd6-45d2-8fb6-7d5b9b36544e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\9.Manager\MathManager">
+      <UniqueIdentifier>{ad883741-d84b-48a4-af61-9bf9ec712544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Bullet">
+      <UniqueIdentifier>{89b74c18-bf53-46db-9bf0-8decc49752ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Item">
+      <UniqueIdentifier>{aedb7b81-7cf0-436b-b041-36c6d7e6e6d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Item\ItemBridge">
+      <UniqueIdentifier>{9961eefd-f930-49e0-9454-cc6bfcbdaed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Item\ItemBridge\Bulletproof">
+      <UniqueIdentifier>{d7ad36ec-14b5-4e9e-8271-cf91c288dab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Item\ItemBridge\RepairTool">
+      <UniqueIdentifier>{46144054-9373-40f1-94a9-7340b4214b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Item\ItemBridge\PowerUp">
+      <UniqueIdentifier>{6d3630fb-7ebd-4365-b221-fc040403a2bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Bullet\BulletBridge">
+      <UniqueIdentifier>{f30a4ab2-1246-4cf6-a481-6949dd39780b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Bullet\BulletBridge\Pistol">
+      <UniqueIdentifier>{ba4c1cac-5385-47a5-b099-7020ad509d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Bullet\BulletBridge\SG">
+      <UniqueIdentifier>{2334c6be-a62e-461f-8a35-dc79529b65d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Bullet\BulletBridge\MG">
+      <UniqueIdentifier>{884f8a65-5d3d-45ef-b846-ba14f1b70f00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Bullet\BulletBridge\RPG7">
+      <UniqueIdentifier>{6d654d41-9e39-4a76-a630-1f2428a6e215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Object\Non-PB\BackGround">
+      <UniqueIdentifier>{d525f341-1f4f-4117-969f-e6b9722b4088}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -196,22 +223,28 @@
       <Filter>소스 파일\1.Object\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>소스 파일\1.Object\Non-PB\Item</Filter>
+      <Filter>소스 파일\1.Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Junk.cpp">
       <Filter>소스 파일\1.Object\Non-PB\Junk</Filter>
     </ClCompile>
-    <ClCompile Include="Drone.cpp">
-      <Filter>소스 파일\1.Object\Skill\Drone</Filter>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일\1.Object\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="SpikeStrip.cpp">
-      <Filter>소스 파일\1.Object\Skill\SpikeStrip</Filter>
+    <ClCompile Include="MG.cpp">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\MG</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyCar.cpp">
-      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyCar</Filter>
+    <ClCompile Include="RPG7.cpp">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\RPG7</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTruck.cpp">
-      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyTruck</Filter>
+    <ClCompile Include="SG.cpp">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\SG</Filter>
+    </ClCompile>
+    <ClCompile Include="Pistol.cpp">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>소스 파일\1.Object\Non-PB\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -288,22 +321,40 @@
       <Filter>소스 파일\1.Object\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>소스 파일\1.Object\Non-PB\Item</Filter>
+      <Filter>소스 파일\1.Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Junk.h">
       <Filter>소스 파일\1.Object\Non-PB\Junk</Filter>
     </ClInclude>
-    <ClInclude Include="Drone.h">
-      <Filter>소스 파일\1.Object\Skill\Drone</Filter>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>소스 파일\9.Manager\CollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="SpikeStrip.h">
-      <Filter>소스 파일\1.Object\Skill\SpikeStrip</Filter>
+    <ClInclude Include="MathManager.h">
+      <Filter>소스 파일\9.Manager\MathManager</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyCar.h">
-      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyCar</Filter>
+    <ClInclude Include="Bullet.h">
+      <Filter>소스 파일\1.Object\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyTruck.h">
-      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyTruck</Filter>
+    <ClInclude Include="MG.h">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\MG</Filter>
+    </ClInclude>
+    <ClInclude Include="RPG7.h">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\RPG7</Filter>
+    </ClInclude>
+    <ClInclude Include="SG.h">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\SG</Filter>
+    </ClInclude>
+    <ClInclude Include="Pistol.h">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge\Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>소스 파일\9.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBridge.h">
+      <Filter>소스 파일\1.Object\Enemy\EnemyBridge</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>소스 파일\1.Object\Non-PB\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

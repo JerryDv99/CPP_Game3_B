@@ -10,7 +10,7 @@ int main(void)
 	SetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), ENABLE_PROCESSED_INPUT | ENABLE_MOUSE_INPUT);
 
 	system("title ¹ÚÁØÇü : Highway Chase");
-	system("mode con cols = 150 lines = 48");
+	system("mode con cols = 150 lines = 44");
 
 	MainUpdate Main;
 	Main.Start();
