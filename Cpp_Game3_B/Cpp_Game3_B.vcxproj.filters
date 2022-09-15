@@ -246,6 +246,9 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>소스 파일\1.Object\Non-PB\BackGround</Filter>
     </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>소스 파일\1.Object\Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h">
@@ -355,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>소스 파일\1.Object\Non-PB\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>소스 파일\1.Object\Skill</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

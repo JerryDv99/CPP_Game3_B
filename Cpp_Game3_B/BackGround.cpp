@@ -1,5 +1,7 @@
 #include "BackGround.h"
 #include "CursorManager.h"
+#include "ObjectManager.h"
+#include "Player.h"
 
 BackGround::BackGround()
 {
@@ -42,8 +44,8 @@ Object* BackGround::Start(string _Key)
 int BackGround::Update()
 {
     if (Count < 10)
-        Count += 0.5f;
-    if (Count == 10)
+        Count += 0.01f * ((Player*)ObjectManager::GetInstance()->GetPlayer())->GetSpeed();
+    if (Count >= 10)
         Count = 0;
    
     return 0;

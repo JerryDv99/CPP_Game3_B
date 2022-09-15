@@ -24,8 +24,8 @@ Object* Player::Start(string _Key)
 	Target = nullptr;
 
 	Speed = 70.0f;
-
-	Index = 1;
+	Delay = GetTickCount64();
+	//Index = 1;
 
 	Texture[0] = "   __*_";
 	Texture[1] = "忙\"LSPD`式忖";
@@ -34,7 +34,7 @@ Object* Player::Start(string _Key)
 	Texture[3] = "忙式式式式**忖";
 	Texture[4] = "弛       弛 弛___";
 	Texture[5] = "弛 LSPD         弛";
-	Texture[6] = "戌式�鵀’’’﹝鵀�";
+	Texture[6] = "戌式≡式式式式≡戎";
 
 	return this;
 }
@@ -58,33 +58,61 @@ int Player::Update()
 	if (T == 20 && !Temp)
 		Temp = true;
 
-	if (dwKey & KEY_UP)
+	if (dwKey & KEY_UP && Delay + 100 < GetTickCount64())
 	{
+		Delay = GetTickCount64();
 		if (Info.Position.y > 6)
 			Info.Position.y -= 7;
 	}
 
-	if (dwKey & KEY_DOWN)
+	if (dwKey & KEY_DOWN && Delay + 100 < GetTickCount64())
 	{
+		Delay = GetTickCount64();
 		if (Info.Position.y < 27)
 		Info.Position.y += 7;
 	}
 
 	if (dwKey & KEY_LEFT)
 	{
-		if (Speed > 20)
-			Speed --;
+		if (Index)
+		{
+			if (Speed > 20)
+				Speed--;
+		}
+		else
+		{
+			if (Speed > 40)
+				Speed--;
+		}
+		
 		if (StartPoint.x > 0)
-			Info.Position.x -= 1 * (Speed * 0.01f);
+		{
+			if(Speed > 60)
+				Info.Position.x -= 1.1f * (Speed * 0.01f);
+			else
+				Info.Position.x -= 1.0f * (Speed * 0.01f);
+		}
 	}
 
 
 	if (dwKey & KEY_RIGHT)
 	{
-		if (Speed < 120)
-			Speed++;
-		if(EndPoint.x < 100 + Speed / 3)
-			Info.Position.x += 1.5f * (Speed * 0.01f);
+		if (Index)
+		{
+			if (Speed < 80)
+				Speed++;
+		}
+		else
+		{
+			if (Speed < 130)
+				Speed++;
+		}
+
+		if (Speed > 60)
+		{
+			if (EndPoint.x < 70 + Speed / 2)
+				Info.Position.x += 1.25f * (Speed * 0.01f);
+		}		
 	}
 
 	return 0;
@@ -115,7 +143,6 @@ void Player::Render()
 		if (!Temp)
 			CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 10, Info.Position.y - 2, "**", 9);
 	}
-	CursorManager::GetInstance()->WriteBuffer(140, 44, Speed, 11);
 }
 
 void Player::Release()

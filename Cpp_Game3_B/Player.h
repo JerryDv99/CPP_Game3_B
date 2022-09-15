@@ -8,6 +8,7 @@ private:
 	int Index;
 	bool Temp;
 	int T;
+	ULONGLONG Delay;
 public:
 	virtual Object* Start(string _Key)override;
 	virtual int Update()override;

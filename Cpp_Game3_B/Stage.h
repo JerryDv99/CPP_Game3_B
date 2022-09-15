@@ -4,6 +4,11 @@
 class Object;
 class Stage : public Scene
 {
+private:
+	vector<Object*> pSkillList;
+	char* Texture[8];
+	int Count;
+	int Spd;
 public:
 	virtual void Start()override;
 	virtual void Update()override;
