@@ -8,6 +8,7 @@ protected:
 	Object* Target;
 	string Key;
 	float Speed;
+	int Index;
 public:
 	virtual Object* Start(string _Key)PURE;
 	virtual int   Update()PURE;
@@ -27,6 +28,8 @@ public:
 	void SetDirection(Vector3 _Direction) { Info.Direction = _Direction; }
 	void SetDirection(float _x, float _y) { Info.Direction = Vector3(_x, _y); }
 	void SetTarget(Object* _Target) { Target = _Target; }
+
+	void SetIndex(int _Index) { Index = _Index; }
 public:
 	Object();
 	Object(Transform _Info) : Info(_Info), Speed(0.0f), Target(nullptr) {};

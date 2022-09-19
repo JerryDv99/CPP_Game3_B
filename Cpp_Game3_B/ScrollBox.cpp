@@ -21,7 +21,7 @@ void ScrollBox::Start()
 	WidthTexture = "";
 	HeightTexture = (char*)"¦¢";
 
-	ScrollBoxIndex = Index++;
+	Index = 0;
 
 	Texture.push_back("¦£¦¡¦¤");
 	Texture.push_back("¦¢¡¡¦¢");
@@ -36,7 +36,7 @@ void ScrollBox::Update()
 void ScrollBox::Render()
 {
 	for (int i = 0; i < Texture.size(); ++i)
-		CursorManager::GetInstance()->WriteBuffer(StartPos.x, StartPos.y + i, Texture[i], ScrollBoxIndex == Index ? 12 : 15);
+		CursorManager::GetInstance()->WriteBuffer(StartPos.x, StartPos.y + i, Texture[i], Index >= i ? 12 : 8);
 }
 
 void ScrollBox::Release()

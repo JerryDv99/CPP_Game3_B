@@ -9,14 +9,14 @@ protected:
 	string Key;
 	vector<string> Texture;
 	int End;
-public:
-	static int Index;
+	int Index;
 public:
 	virtual void Start()PURE;
 	virtual void Update()PURE;
 	virtual void Render()PURE;
 	virtual void Release()PURE;
 public:
+	void SetIndex(int _Index) { Index = _Index; }
 	void SetPosition(int _x, int _y) { StartPos = Vector3(_x, _y); }
 
 	void SetBoxSize(int _x, int _y)

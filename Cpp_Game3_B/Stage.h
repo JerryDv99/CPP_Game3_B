@@ -9,6 +9,9 @@ private:
 	char* Texture[8];
 	int Count;
 	int Spd;
+	int Score;
+	int SkillGauge1;
+	int SkillGauge2;
 public:
 	virtual void Start()override;
 	virtual void Update()override;

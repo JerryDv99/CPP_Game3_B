@@ -32,6 +32,8 @@ Object* Skill::Start(string _Key)
 int Skill::Update()
 {
 	Box->Update();
+	Box->SetIndex(Index);
+
 	return 0;
 }
 
@@ -44,7 +46,7 @@ void Skill::Render()
 		CursorManager::GetInstance()->WriteBuffer(
 			int(Info.Position.x - (Info.Scale.x / 2) + 2),
 			int(Info.Position.y - (Info.Scale.y / 2) + 1 + i),
-			Texture[i]);
+			Texture[i], Index >= i + 1 ? 12 : 8);
 	}
 }
 
