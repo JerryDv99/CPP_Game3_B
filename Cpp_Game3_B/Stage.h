@@ -12,6 +12,7 @@ private:
 	int Score;
 	int SkillGauge1;
 	int SkillGauge2;
+	ULONGLONG Respawn;
 public:
 	virtual void Start()override;
 	virtual void Update()override;

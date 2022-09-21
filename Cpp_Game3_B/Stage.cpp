@@ -29,6 +29,7 @@ void Stage::Start()
 	Score = 0;
 	SkillGauge1 = 0;
 	SkillGauge2 = 0;
+	Respawn = GetTickCount64();
 
 	Object* pObj = PrototypeManager::GetInstance()->FindObject("Player")->Clone();
 	Object* pBG = PrototypeManager::GetInstance()->FindObject("BackGround")->Clone();
@@ -74,7 +75,7 @@ void Stage::Update()
 {
 	vector<Object*>::iterator iter = pSkillList.begin();
 	DWORD dwKey = InputManager::GetInstance()->GetKey();
-
+	Spd = ((int)((Player*)ObjectManager::GetInstance()->GetPlayer())->GetSpeed());
 
 	for (vector<Object*>::iterator iter = pSkillList.begin(); iter != pSkillList.end(); ++iter)
 		(*iter)->Update();
@@ -103,6 +104,39 @@ void Stage::Update()
 		(*(iter + 1))->SetIndex(4);
 	if (SkillGauge2 >= 1000)
 		(*(iter + 1))->SetIndex(5);
+
+	if (Respawn + 7000 < GetTickCount64())
+	{
+		srand(GetTickCount64() * Respawn);
+		Respawn = GetTickCount64();
+		switch (rand() % 4)
+		{
+		case 0:
+			if (Spd < 110)
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 6.0f));
+			else
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 6.0f));
+			break;
+		case 1:
+			if (Spd < 110)
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 13.0f));
+			else
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 13.0f));
+			break;
+		case 2:
+			if (Spd < 110)
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 20.0f));
+			else
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 20.0f));
+			break;
+		case 3:
+			if (Spd < 110)
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 27.0f));
+			else
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 27.0f));
+			break;
+		}		
+	}
 
 	if (SkillGauge1 >= 500 && dwKey & KEY_R)
 	{
@@ -136,7 +170,6 @@ void Stage::Update()
 		(*(iter + 1))->SetIndex(0);
 	}
 
-	Spd = ((int)((Player*)ObjectManager::GetInstance()->GetPlayer())->GetSpeed());
 	ObjectManager::GetInstance()->Update();
 }
 

@@ -1,5 +1,9 @@
 #include "Enemy.h"
 #include "Bridge.h"
+#include "EnemyCar.h"
+#include "EnemyTruck.h"
+#include "CollisionManager.h"
+#include "CursorManager.h"
 
 Bridge* Enemy::BridgeList[3];
 
@@ -20,8 +24,8 @@ Object* Enemy::Start(string _Key)
 
 	pBridge = nullptr;
 
-	//BridgeList[EnemyID_Car] = new EnemyCar;
-	//BridgeList[EnemyID_Truck] = new EnemyTruck;
+	BridgeList[EnemyID_Car] = new EnemyCar;
+	BridgeList[EnemyID_Truck] = new EnemyTruck;
 	//BridgeList[EnemyID_Boss] = new Boss;
 
 	Time = GetTickCount64();
@@ -33,6 +37,37 @@ int Enemy::Update()
 {
 	if (pBridge)
 		pBridge->Update(Info);
+	else
+	{
+		srand(int(Time * GetTickCount64()));
+		switch (rand() % 3)
+		{
+		case 0:
+		case 1:
+			pBridge = BridgeList[EnemyID_Car]->Clone();
+			Info.Scale = Vector3(14.0f, 2.0f);
+			Index = 1;
+			Weight = 1.5f;
+			HP = 50;
+			break;
+		case 2:
+			pBridge = BridgeList[EnemyID_Truck]->Clone();
+			Info.Scale = Vector3(16.0f, 3.0f);
+			Index = 2;
+			Weight = 2.5f;
+			HP = 75;
+			break;
+		}
+		pBridge->Start();
+		pBridge->SetObject(this);
+	}
+
+	//if (CollisionManager::RectCollision(Info, ))
+		//return 1;
+
+	if (Info.Position.x - Info.Scale.x / 2 <= 1 || Info.Position.x + Info.Scale.x / 2 >= 150 || HP <= 0)
+		return 1;
+
 	return 0;
 }
 

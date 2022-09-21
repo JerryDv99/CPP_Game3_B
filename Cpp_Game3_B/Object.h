@@ -8,7 +8,9 @@ protected:
 	Object* Target;
 	string Key;
 	float Speed;
+	float Weight;
 	int Index;
+	int  HP;
 public:
 	virtual Object* Start(string _Key)PURE;
 	virtual int   Update()PURE;
@@ -25,11 +27,17 @@ public:
 	void SetPosition(Vector3 _Position) { Info.Position = _Position; }
 	void SetPosition(float _x, float _y) { Info.Position = Vector3(_x, _y); }
 
+	void SetScale(float _x, float _y) { Info.Scale = Vector3(_x, _y); }
+
 	void SetDirection(Vector3 _Direction) { Info.Direction = _Direction; }
 	void SetDirection(float _x, float _y) { Info.Direction = Vector3(_x, _y); }
 	void SetTarget(Object* _Target) { Target = _Target; }
 
+	void SetWeight(float _Weight) { Weight = _Weight; }
 	void SetIndex(int _Index) { Index = _Index; }
+
+	float GetStartPos() const { return Info.Position.x -  Info.Scale.x / 2; }
+	float GetEndPos() const { return Info.Position.x +  Info.Scale.x / 2; }
 public:
 	Object();
 	Object(Transform _Info) : Info(_Info), Speed(0.0f), Target(nullptr) {};

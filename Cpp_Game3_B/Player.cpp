@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "CursorManager.h"
+#include "CollisionManager.h"
+#include "ObjectpoolManager.h"
 #include "InputManager.h"
 
 Player::Player() : Index(0), Temp(false)
@@ -23,7 +25,9 @@ Object* Player::Start(string _Key)
 
 	Target = nullptr;
 
+	HP = 100;
 	Speed = 70.0f;
+	Weight = 1.9f;
 	Delay = GetTickCount64();
 	//Index = 1;
 
@@ -57,6 +61,9 @@ int Player::Update()
 		Temp = false;
 	if (T == 20 && !Temp)
 		Temp = true;
+
+	/*if (ObjectpoolManager::GetInstance()->Collision("Player", "SpikeStrip"));
+		HP -= 10;*/
 
 	if (dwKey & KEY_UP && Delay + 100 < GetTickCount64())
 	{
@@ -121,6 +128,7 @@ int Player::Update()
 void Player::Render()
 {
 	Vector3 StartPoint = Info.Position - Info.Scale / 2;
+	CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 5, Info.Position.y - 3, HP);
 
 	if (!Index)
 	{
@@ -143,6 +151,8 @@ void Player::Render()
 		if (!Temp)
 			CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 10, Info.Position.y - 2, "**", 9);
 	}
+	CursorManager::GetInstance()->WriteBuffer(Info.Position.x + 3, Info.Position.y + 3, Info.Position.x, 10);
+	CursorManager::GetInstance()->WriteBuffer(Info.Position.x + 3, Info.Position.y + 4, Info.Position.y, 10);
 }
 
 void Player::Release()
