@@ -3,6 +3,7 @@
 #include"Player.h"
 #include"Enemy.h"
 #include"BackGround.h"
+#include"SpikeStrip.h"
 
 PrototypeManager* PrototypeManager::Instance = nullptr;
 
@@ -33,6 +34,9 @@ void PrototypeManager::Initialize()
 
 	Key = "BackGround";
 	ObjectList[Key] = (new BackGround(Info))->Start(Key);
+
+	Key = "SpikeStrip";
+	ObjectList[Key] = (new SpikeStrip(Info))->Start(Key);
 }
 
 Object* PrototypeManager::FindObject(string _Key)

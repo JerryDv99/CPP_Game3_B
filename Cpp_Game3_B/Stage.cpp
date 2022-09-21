@@ -10,6 +10,7 @@
 #include "ScrollBox.h"
 #include "Skill.h"
 #include "Player.h"
+#include "SpikeStrip.h"
 
 Stage::Stage() : Spd(0), Score(0), SkillGauge1(0), SkillGauge2(0)
 {
@@ -78,7 +79,7 @@ void Stage::Update()
 	for (vector<Object*>::iterator iter = pSkillList.begin(); iter != pSkillList.end(); ++iter)
 		(*iter)->Update();
 
-	SkillGauge1 ++;
+	SkillGauge1 += 5;
 	SkillGauge2 ++;
 
 	if (SkillGauge1 >= 100)
@@ -107,6 +108,26 @@ void Stage::Update()
 	{
 		SkillGauge1 = 0;
 		(*iter)->SetIndex(0);
+		switch ((int)ObjectManager::GetInstance()->GetPlayer()->GetPosition().y)
+		{
+		case 6:
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 13));
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 27));
+			break;
+		case 13:
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 6));
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 20));
+			break;
+		case 20:
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 13));
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 27));
+			break;
+		case 27:
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 6));
+			ObjectManager::GetInstance()->AddObject("SpikeStrip", Vector3(148, 20));
+			break;
+		}
+		
 	}
 	
 	if (SkillGauge2 >= 1000 && dwKey & KEY_T)
@@ -300,6 +321,9 @@ void Stage::Render()
 		CursorManager::GetInstance()->WriteBuffer(142, 37, (char*)"T", 10);
 	else
 		CursorManager::GetInstance()->WriteBuffer(142, 37, (char*)"T", 8);
+
+	//for (int i = 0; i < 6; ++i)
+		//CursorManager::GetInstance()->WriteBuffer(142, 17 + i, (char*)"X", 3);
 
 }
 

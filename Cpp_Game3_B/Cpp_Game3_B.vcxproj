@@ -24,8 +24,11 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Citizen.cpp" />
     <ClCompile Include="CursorManager.cpp" />
+    <ClCompile Include="Drone.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyCar.cpp" />
+    <ClCompile Include="EnemyTruck.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Junk.cpp" />
@@ -46,6 +49,7 @@
     <ClCompile Include="ScrollBox.cpp" />
     <ClCompile Include="SG.cpp" />
     <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="SpikeStrip.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UserInterface.cpp" />
@@ -59,9 +63,12 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="CursorManager.h" />
+    <ClInclude Include="Drone.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBridge.h" />
+    <ClInclude Include="EnemyCar.h" />
+    <ClInclude Include="EnemyTruck.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Headers.h" />
     <ClInclude Include="InputManager.h" />
@@ -84,6 +91,7 @@
     <ClInclude Include="ScrollBox.h" />
     <ClInclude Include="SG.h" />
     <ClInclude Include="Skill.h" />
+    <ClInclude Include="SpikeStrip.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="UI.h" />

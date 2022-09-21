@@ -34,18 +34,21 @@ Object* BackGround::Start(string _Key)
     Texture[7] = (char*)"          быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы";
     Texture[8] = (char*)"        быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы";
     Texture[9] = (char*)"      быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы";
-    Texture[10] = (char*)"быбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбы";
-    Texture[11] = (char*)"в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞";
-    Texture[12] = (char*)"";
+    Texture[10] = (char*)"    быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы";
+    Texture[11] = (char*)"  быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы";
+    Texture[12] = (char*)"быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы            быбыбыбыбыбы";
+    Texture[13] = (char*)"быбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбыбы";
+    Texture[14] = (char*)"в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞в╞";
+    Texture[15] = (char*)"";
     
     return this;
 }
 
 int BackGround::Update()
 {
-    if (Count < 10)
-        Count += 0.01f * ((Player*)ObjectManager::GetInstance()->GetPlayer())->GetSpeed();
-    if (Count >= 10)
+    if (Count < 13)
+        Count += 0.02f * ((Player*)ObjectManager::GetInstance()->GetPlayer())->GetSpeed();
+    if (Count >= 13)
         Count = 0;
    
     return 0;
@@ -53,11 +56,11 @@ int BackGround::Update()
 
 void BackGround::Render()
 {
-    CursorManager::GetInstance()->WriteBuffer(0, 2, Texture[11], 8);
-    CursorManager::GetInstance()->WriteBuffer(0, 30, Texture[11], 8);
+    CursorManager::GetInstance()->WriteBuffer(0, 2, Texture[14], 8);
+    CursorManager::GetInstance()->WriteBuffer(0, 30, Texture[14], 8);
     CursorManager::GetInstance()->WriteBuffer(0, 9, Texture[(int)Count]);
     CursorManager::GetInstance()->WriteBuffer(0, 23, Texture[(int)Count]);
-    CursorManager::GetInstance()->WriteBuffer(0, 16, Texture[10], 14);
+    CursorManager::GetInstance()->WriteBuffer(0, 16, Texture[13], 14);
 }
 
 void BackGround::Release()

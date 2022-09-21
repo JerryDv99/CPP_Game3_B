@@ -249,6 +249,18 @@
     <ClCompile Include="Skill.cpp">
       <Filter>소스 파일\1.Object\Skill</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyCar.cpp">
+      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyCar</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTruck.cpp">
+      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyTruck</Filter>
+    </ClCompile>
+    <ClCompile Include="SpikeStrip.cpp">
+      <Filter>소스 파일\1.Object\Skill\SpikeStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="Drone.cpp">
+      <Filter>소스 파일\1.Object\Skill\Drone</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h">
@@ -361,6 +373,18 @@
     </ClInclude>
     <ClInclude Include="Skill.h">
       <Filter>소스 파일\1.Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyCar.h">
+      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyCar</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTruck.h">
+      <Filter>소스 파일\1.Object\Enemy\EnemyBridge\EnemyTruck</Filter>
+    </ClInclude>
+    <ClInclude Include="SpikeStrip.h">
+      <Filter>소스 파일\1.Object\Skill\SpikeStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="Drone.h">
+      <Filter>소스 파일\1.Object\Skill\Drone</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
