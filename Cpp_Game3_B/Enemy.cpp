@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Bridge.h"
+#include "Bullet.h"
 #include "EnemyCar.h"
 #include "EnemyTruck.h"
 #include "CursorManager.h"
@@ -7,7 +8,7 @@
 
 Bridge* Enemy::BridgeList[3];
 
-Enemy::Enemy() : pBridge(nullptr), Time(0)
+Enemy::Enemy() : pBridge(nullptr), Time(0), Reload(0)
 {
 	for (int i = 0; i < 3; ++i)
 		BridgeList[i] = nullptr;
@@ -29,6 +30,7 @@ Object* Enemy::Start(string _Key)
 	//BridgeList[EnemyID_Boss] = new Boss;
 
 	Time = GetTickCount64();
+	Reload = GetTickCount64();
 
 	return this;
 }
@@ -36,7 +38,27 @@ Object* Enemy::Start(string _Key)
 int Enemy::Update()
 {
 	if (pBridge)
+	{
 		pBridge->Update(Info);
+		if (Index == 1)
+		{
+
+		}
+		else if (Index == 2)
+		{
+			if (Reload + 200 < GetTickCount64())
+			{
+				Reload = GetTickCount64();
+				Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
+				//pBridge = ((Bullet*)pObj)->GetBridge(1)->Clone();
+				pObj->SetIndex(1);
+				pObj->SetPosition(Info.Position);
+				//((Bullet*)pObj)->SetBridge(pBridge);
+				pObj->SetDirection(ObjectManager::GetInstance()->GetPlayer()->GetPosition());
+				//ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
+			}
+		}
+	}
 	else
 	{
 		srand(int(Time * GetTickCount64()));
@@ -49,7 +71,7 @@ int Enemy::Update()
 			Index = 1;
 			Weight = 1.5f;
 			HP = 50;
-			break;
+			//break;
 		case 2:
 			pBridge = BridgeList[EnemyID_Truck]->Clone();
 			Info.Scale = Vector3(16.0f, 3.0f);
@@ -62,14 +84,13 @@ int Enemy::Update()
 		pBridge->SetObject(this);
 	}
 
-	if (ObjectManager::GetInstance()->Collision("Enemy", "Bullet"))
-		return 1;
-
-	if (ObjectManager::GetInstance()->Collision("Enemy", "SpikeStrip"))
-		return 1;
+	
 
 	if (Info.Position.x - Info.Scale.x / 2 <= 1 || Info.Position.x + Info.Scale.x / 2 >= 150 || HP <= 0)
+	{
+		Release();
 		return 1;
+	}
 
 	return 0;
 }

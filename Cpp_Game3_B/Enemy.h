@@ -10,6 +10,7 @@ private:
 private:
 	Bridge* pBridge;
 	ULONGLONG Time;
+	ULONGLONG Reload;
 public:
 	void SetBridge(Bridge* _Bridge) { pBridge = _Bridge; }
 public:

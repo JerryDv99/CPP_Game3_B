@@ -31,6 +31,22 @@ void ObjectManager::AddObject(string _Key, Vector3 _Position)
 	ObjectpoolManager::GetInstance()->SwitchingObject(_Key, _Position);
 }
 
+Object* ObjectManager::GetObj(string _Key)
+{
+	if (!ObjectpoolManager::GetInstance()->FindObject(_Key))
+		ObjectpoolManager::GetInstance()->AddObject(_Key);
+
+	Object* pObj = ObjectpoolManager::GetInstance()->GetObj(_Key);
+
+	return pObj;
+}
+
+void ObjectManager::PutEnable(string _Key, Object* _Obj)
+{
+	if (ObjectpoolManager::GetInstance()->FindObject(_Key))
+		ObjectpoolManager::GetInstance()->PutEnable(_Key, _Obj);
+}
+
 void ObjectManager::Update()
 {
 	pBG->Update();
@@ -69,10 +85,9 @@ bool ObjectManager::Collision(string _C, string _T)
 				else
 					++iterT;
 			}
-		}
-		
+		}		
 	}
-	if (ObjectpoolManager::GetInstance()->FindObject(_C) && ObjectpoolManager::GetInstance()->FindObject(_T))
+	else if (ObjectpoolManager::GetInstance()->FindObject(_C) && ObjectpoolManager::GetInstance()->FindObject(_T))
 	{
 		list<Object*> iter = ObjectpoolManager::GetInstance()->GetList(_C);
 		list<Object*> iter2 = ObjectpoolManager::GetInstance()->GetList(_T);		
@@ -94,5 +109,47 @@ bool ObjectManager::Collision(string _C, string _T)
 		}		
 	}
 
+	return false;
+}
+
+Object* ObjectManager::GetCollObj(string _C, Object* _Obj)
+{	
+	if (ObjectpoolManager::GetInstance()->FindObject(_C))
+	{
+		list<Object*> iter = ObjectpoolManager::GetInstance()->GetList(_C);
+		if (!iter.empty())
+		{
+			auto iterC = iter.begin();
+			for (iterC; iterC != iter.end(); ++iterC)
+			{
+				if (CollisionManager::RectCollision((*iterC)->GetTransform(), _Obj->GetTransform()))
+					return (*iterC);
+			}
+		}
+	}
+	return nullptr;
+}
+
+bool ObjectManager::Collision(string _C, Object* _Obj)
+{
+	if (_C == "Player")
+	{
+		if (CollisionManager::RectCollision(pPlayer->GetTransform(), _Obj->GetTransform()))
+			return true;
+	}
+	else if (ObjectpoolManager::GetInstance()->FindObject(_C))
+	{
+		list<Object*> iter = ObjectpoolManager::GetInstance()->GetList(_C);
+		if (!iter.empty())
+		{
+			auto iterC = iter.begin();
+			for (iterC; iterC != iter.end(); ++iterC)
+			{
+				if (CollisionManager::RectCollision((*iterC)->GetTransform(), _Obj->GetTransform()))
+					return true;
+			}
+		}
+	}
+	
 	return false;
 }

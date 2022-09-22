@@ -2,10 +2,9 @@
 #include "CursorManager.h"
 #include "CollisionManager.h"
 #include "ObjectManager.h"
-#include "ObjectpoolManager.h"
 #include "InputManager.h"
 
-Player::Player() : Index(0), Temp(false)
+Player::Player() :  Temp(false)
 {
 	for (int i = 0; i < 8; ++i)
 		Texture[i] = "";
@@ -31,7 +30,7 @@ Object* Player::Start(string _Key)
 	Weight = 1.9f;
 	Delay = GetTickCount64();
 	Reload = GetTickCount64();
-	//Index = 1;
+	Index = 1;
 
 	Texture[0] = "   __*_";
 	Texture[1] = "¦£\"LSPD`¦¡¦¤";
@@ -66,7 +65,91 @@ int Player::Update()
 
 	if (dwKey & KEY_SPACE)
 	{
-		ObjectManager::GetInstance()->AddObject("Bullet", Info.Position);		
+		if (!Index && Reload + 300 < GetTickCount64())
+		{
+			Reload = GetTickCount64();
+			Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
+			pObj->SetIndex(0);
+			pObj->SetPosition(Info.Position);
+			pObj->SetDirection(1.0f, 0.0f);
+			if (dwKey & KEY_AUP)
+				pObj->SetDirection(0.0f, -1.0f);
+			if (dwKey & KEY_ADOWN)
+				pObj->SetDirection(0.0f, 1.0f);
+			if (dwKey & KEY_ALEFT)
+				pObj->SetDirection(-1.0f, 0.0f);
+			if (dwKey & KEY_AUP && dwKey & KEY_ALEFT)
+				pObj->SetDirection(-1.0f, -0.25f);
+			if (dwKey & KEY_AUP && dwKey & KEY_ARIGHT)
+				pObj->SetDirection(1.0f, -0.25f);
+			if (dwKey & KEY_ADOWN && dwKey & KEY_ARIGHT)
+				pObj->SetDirection(1.0f, 0.25f);
+			if (dwKey & KEY_ADOWN && dwKey & KEY_ALEFT)
+				pObj->SetDirection(-1.0f, 0.25f);
+			ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
+		}
+
+		else if (Index && Reload + 2000 < GetTickCount64())
+		{
+			Reload = GetTickCount64();
+			Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
+			Object* pObj2 = ObjectManager::GetInstance()->GetObj("Bullet");
+			Object* pObj3 = ObjectManager::GetInstance()->GetObj("Bullet");
+			pObj->SetIndex(0);
+			pObj2->SetIndex(0);
+			pObj3->SetIndex(0);
+			pObj->SetPosition(Info.Position);
+			pObj2->SetPosition(Info.Position);
+			pObj3->SetPosition(Info.Position);
+			pObj->SetDirection(1.0f, 0.0f);
+			pObj2->SetDirection(1.0f, -0.1f);
+			pObj3->SetDirection(1.0f, 0.1f);
+			if (dwKey & KEY_AUP)
+			{
+				pObj->SetDirection(0.0f, -1.0f);
+				pObj2->SetDirection(-0.1f, -1.0f);
+				pObj3->SetDirection(0.1f, -1.0f);
+			}
+			if (dwKey & KEY_ADOWN)
+			{
+				pObj->SetDirection(0.0f, 1.0f);
+				pObj2->SetDirection(-0.1f, 1.0f);
+				pObj3->SetDirection(0.1f, 1.0f);
+			}
+			if (dwKey & KEY_ALEFT)
+			{
+				pObj->SetDirection(-1.0f, 0.0f);
+				pObj2->SetDirection(-1.0f, -0.1f);
+				pObj3->SetDirection(-1.0f, 0.1f);
+			}
+			if (dwKey & KEY_AUP && dwKey & KEY_ALEFT)
+			{
+				pObj->SetDirection(-1.0f, -0.25f);
+				pObj2->SetDirection(-1.0f, -0.35f);
+				pObj3->SetDirection(-1.0f, -0.15f);
+			}
+			if (dwKey & KEY_AUP && dwKey & KEY_ARIGHT)
+			{
+				pObj->SetDirection(1.0f, -0.25f);
+				pObj2->SetDirection(1.0f, -0.35f);
+				pObj3->SetDirection(1.0f, -0.15f);
+			}
+			if (dwKey & KEY_ADOWN && dwKey & KEY_ARIGHT)
+			{
+				pObj->SetDirection(1.0f, 0.25f);
+				pObj2->SetDirection(1.0f, 0.35f);
+				pObj3->SetDirection(1.0f, 0.15f);
+			}
+			if (dwKey & KEY_ADOWN && dwKey & KEY_ALEFT)
+			{
+				pObj->SetDirection(-1.0f, 0.25f);
+				pObj2->SetDirection(-1.0f, 0.35f);
+				pObj3->SetDirection(-1.0f, 0.15f);
+			}
+			ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
+			ObjectManager::GetInstance()->PutEnable("Bullet", pObj2);
+			ObjectManager::GetInstance()->PutEnable("Bullet", pObj3);
+		}
 	}
 
 	if (dwKey & KEY_UP && Delay + 100 < GetTickCount64())
@@ -87,7 +170,7 @@ int Player::Update()
 	{
 		if (Index)
 		{
-			if (Speed > 20)
+			if (Speed > 30)
 				Speed--;
 		}
 		else
@@ -160,8 +243,6 @@ void Player::Render()
 		if (!Temp)
 			CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 10, Info.Position.y - 2, "**", 9);
 	}
-	CursorManager::GetInstance()->WriteBuffer(Info.Position.x + 3, Info.Position.y + 3, Info.Position.x, 10);
-	CursorManager::GetInstance()->WriteBuffer(Info.Position.x + 3, Info.Position.y + 4, Info.Position.y, 10);
 }
 
 void Player::Release()

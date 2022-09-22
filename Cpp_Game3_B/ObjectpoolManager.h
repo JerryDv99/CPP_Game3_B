@@ -21,6 +21,8 @@ public:
 	bool FindObject(string _Key);
 	void AddObject(string _Key);
 	void SwitchingObject(string _Key, Vector3 _Position = Vector3());
+	Object* GetObj(string _Key);
+	void PutEnable(string _Key, Object* _Obj);
 	void Update();
 	void Render();
 	list<Object*> GetList(string _Key);

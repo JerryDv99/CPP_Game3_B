@@ -24,6 +24,7 @@ enum BULLETID
 	BulletID_SG,
 	BulletID_MG,
 	BulletID_RPG7,
+	BulletID_MAX,
 };
 
 

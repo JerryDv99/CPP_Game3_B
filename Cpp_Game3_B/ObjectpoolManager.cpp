@@ -61,6 +61,23 @@ void ObjectpoolManager::SwitchingObject(string _Key, Vector3 _Position)
 	iter->second.pop_back();
 }
 
+Object* ObjectpoolManager::GetObj(string _Key)
+{
+	map<string, list<Object*>>::iterator iter = DisableList.find(_Key);
+
+	if (iter->second.empty())
+		AddObject(_Key);
+	Object* pObj = iter->second.back();
+	iter->second.pop_back();
+
+	return pObj;
+}
+
+void ObjectpoolManager::PutEnable(string _Key, Object* _Obj)
+{
+	EnableList[_Key].push_back(_Obj);
+}
+
 void ObjectpoolManager::Update()
 {
 	for (auto iter = EnableList.begin(); iter != EnableList.end(); ++iter)

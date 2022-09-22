@@ -23,10 +23,14 @@ public:
 public:
 	void AddObject(string _Key);
 	void AddObject(string _Key, Vector3 _Position);
+	Object* GetObj(string _Key);
+	void PutEnable(string _Key, Object* _Obj);
 	void Update();
 	void Render();
 	void Release();
 	bool Collision(string _C, string _T);
+	bool Collision(string _C, Object* _Obj);
+	Object* GetCollObj(string _C, Object* _Obj);
 private:
 	ObjectManager();
 public:

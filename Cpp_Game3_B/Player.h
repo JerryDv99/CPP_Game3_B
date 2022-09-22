@@ -5,7 +5,6 @@ class Player : public Object
 {
 private:
 	string Texture[8];
-	int Index;
 	bool Temp;
 	int T;
 	ULONGLONG Delay;

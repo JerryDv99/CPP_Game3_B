@@ -1,10 +1,17 @@
 #pragma once
 #include "Object.h"
 
+class Bridge;
 class Bullet : public Object
 {
 private:
-
+	static Bridge* BridgeList[BulletID_MAX];
+private:
+	Bridge* pBridge;
+	ULONGLONG Time;
+public:
+	void SetBridge(Bridge* _Bridge) { pBridge = _Bridge; }
+	Bridge* GetBridge(int _ID) { return BridgeList[_ID]; }
 public:
 	virtual Object* Start(string _Key)override;
 	virtual int Update()override;
