@@ -46,6 +46,7 @@ int Enemy::Update()
 		}
 		else if (Index == 2)
 		{
+			/*
 			if (Reload + 200 < GetTickCount64())
 			{
 				Reload = GetTickCount64();
@@ -57,6 +58,7 @@ int Enemy::Update()
 				pObj->SetDirection(ObjectManager::GetInstance()->GetPlayer()->GetPosition());
 				//ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
 			}
+			*/
 		}
 	}
 	else
