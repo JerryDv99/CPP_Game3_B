@@ -3,6 +3,7 @@
 #include "EnemyCar.h"
 #include "EnemyTruck.h"
 #include "CursorManager.h"
+#include "ObjectManager.h"
 
 Bridge* Enemy::BridgeList[3];
 
@@ -60,6 +61,12 @@ int Enemy::Update()
 		pBridge->Start();
 		pBridge->SetObject(this);
 	}
+
+	if (ObjectManager::GetInstance()->Collision("Enemy", "Bullet"))
+		return 1;
+
+	if (ObjectManager::GetInstance()->Collision("Enemy", "SpikeStrip"))
+		return 1;
 
 	if (Info.Position.x - Info.Scale.x / 2 <= 1 || Info.Position.x + Info.Scale.x / 2 >= 150 || HP <= 0)
 		return 1;

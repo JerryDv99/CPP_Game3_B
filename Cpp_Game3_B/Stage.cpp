@@ -115,25 +115,25 @@ void Stage::Update()
 			if (Spd < 110)
 				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 6.0f));
 			else
-				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 6.0f));
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(20.0f, 6.0f));
 			break;
 		case 1:
 			if (Spd < 110)
 				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 13.0f));
 			else
-				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 13.0f));
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(20.0f, 13.0f));
 			break;
 		case 2:
 			if (Spd < 110)
 				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 20.0f));
 			else
-				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 20.0f));
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(20.0f, 20.0f));
 			break;
 		case 3:
 			if (Spd < 110)
 				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(132.0f, 27.0f));
 			else
-				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(10.0f, 27.0f));
+				ObjectManager::GetInstance()->AddObject("Enemy", Vector3(20.0f, 27.0f));
 			break;
 		}		
 	}

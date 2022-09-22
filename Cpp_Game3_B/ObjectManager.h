@@ -26,6 +26,7 @@ public:
 	void Update();
 	void Render();
 	void Release();
+	bool Collision(string _C, string _T);
 private:
 	ObjectManager();
 public:

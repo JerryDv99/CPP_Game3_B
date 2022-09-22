@@ -23,6 +23,7 @@ public:
 	void SwitchingObject(string _Key, Vector3 _Position = Vector3());
 	void Update();
 	void Render();
+	list<Object*> GetList(string _Key);
 private:
 	ObjectpoolManager();
 public:

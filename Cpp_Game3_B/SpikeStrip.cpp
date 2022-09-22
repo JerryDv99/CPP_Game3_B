@@ -28,7 +28,7 @@ int SpikeStrip::Update()
 {
 	int Speed = ((Player*)ObjectManager::GetInstance()->GetPlayer())->GetSpeed();
 
-	Info.Position.x -= 1 * (Speed * 0.01);
+	Info.Position.x -= 1; //3 * (Speed * 0.01);
 
 	if (Info.Position.x <= 0)
 		return 1;

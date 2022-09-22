@@ -2,6 +2,7 @@
 
 #include"Player.h"
 #include"Enemy.h"
+#include"Bullet.h"
 #include"BackGround.h"
 #include"SpikeStrip.h"
 
@@ -31,6 +32,9 @@ void PrototypeManager::Initialize()
 
 	Key = "Player";
 	ObjectList[Key] = (new Player(Info))->Start(Key);
+
+	Key = "Bullet";
+	ObjectList[Key] = (new Bullet(Info))->Start(Key);
 
 	Key = "BackGround";
 	ObjectList[Key] = (new BackGround(Info))->Start(Key);

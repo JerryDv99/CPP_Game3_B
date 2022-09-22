@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "CursorManager.h"
 #include "CollisionManager.h"
+#include "ObjectManager.h"
 #include "ObjectpoolManager.h"
 #include "InputManager.h"
 
@@ -29,6 +30,7 @@ Object* Player::Start(string _Key)
 	Speed = 70.0f;
 	Weight = 1.9f;
 	Delay = GetTickCount64();
+	Reload = GetTickCount64();
 	//Index = 1;
 
 	Texture[0] = "   __*_";
@@ -62,8 +64,10 @@ int Player::Update()
 	if (T == 20 && !Temp)
 		Temp = true;
 
-	/*if (ObjectpoolManager::GetInstance()->Collision("Player", "SpikeStrip"));
-		HP -= 10;*/
+	if (dwKey & KEY_SPACE)
+	{
+		ObjectManager::GetInstance()->AddObject("Bullet", Info.Position);		
+	}
 
 	if (dwKey & KEY_UP && Delay + 100 < GetTickCount64())
 	{
@@ -120,6 +124,11 @@ int Player::Update()
 			if (EndPoint.x < 70 + Speed / 2)
 				Info.Position.x += 1.25f * (Speed * 0.01f);
 		}		
+	}
+
+	if (ObjectManager::GetInstance()->Collision("Player", "SpikeStrip"))
+	{
+		HP -= 10;
 	}
 
 	return 0;

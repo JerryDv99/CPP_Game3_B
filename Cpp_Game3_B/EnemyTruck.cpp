@@ -31,7 +31,7 @@ int EnemyTruck::Update(Transform& _Transform)
 	if (Spd <= 50 && pObject->GetEndPos() < 146)
 		_Transform.Position.x += 0.5f;
 
-	if (Spd >= 100)
+	if (Spd >= 105)
 		_Transform.Position.x -= 0.5f;
 
 	return 0;

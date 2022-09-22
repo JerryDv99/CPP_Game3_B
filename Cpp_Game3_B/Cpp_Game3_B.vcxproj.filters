@@ -386,5 +386,8 @@
     <ClInclude Include="Drone.h">
       <Filter>소스 파일\1.Object\Skill\Drone</Filter>
     </ClInclude>
+    <ClInclude Include="BulletBridge.h">
+      <Filter>소스 파일\1.Object\Bullet\BulletBridge</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -90,3 +90,11 @@ void ObjectpoolManager::Render()
 		}
 	}
 }
+
+list<Object*> ObjectpoolManager::GetList(string _Key)
+{
+	map<string, list<Object*>>::iterator iter =EnableList.find(_Key);
+
+	//if (!iter->second.empty())
+	return iter->second;
+}
