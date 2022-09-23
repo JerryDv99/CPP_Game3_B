@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Bullet.h"
+#include "Bridge.h"
 #include "CursorManager.h"
 #include "CollisionManager.h"
 #include "ObjectManager.h"
@@ -72,6 +74,7 @@ int Player::Update()
 			pObj->SetIndex(0);
 			pObj->SetPosition(Info.Position);
 			pObj->SetDirection(1.0f, 0.0f);
+			((Bullet*)pObj)->SetShooter(this);
 			if (dwKey & KEY_AUP)
 				pObj->SetDirection(0.0f, -1.0f);
 			if (dwKey & KEY_ADOWN)
@@ -104,6 +107,9 @@ int Player::Update()
 			pObj->SetDirection(1.0f, 0.0f);
 			pObj2->SetDirection(1.0f, -0.1f);
 			pObj3->SetDirection(1.0f, 0.1f);
+			((Bullet*)pObj)->SetShooter(this);
+			((Bullet*)pObj2)->SetShooter(this);
+			((Bullet*)pObj3)->SetShooter(this);
 			if (dwKey & KEY_AUP)
 			{
 				pObj->SetDirection(0.0f, -1.0f);

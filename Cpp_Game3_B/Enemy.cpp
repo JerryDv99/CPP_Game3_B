@@ -5,6 +5,7 @@
 #include "EnemyTruck.h"
 #include "CursorManager.h"
 #include "ObjectManager.h"
+#include "MathManager.h"
 
 Bridge* Enemy::BridgeList[3];
 
@@ -42,24 +43,37 @@ int Enemy::Update()
 		pBridge->Update(Info);
 		if (Index == 1)
 		{
-
-		}
-		else if (Index == 2)
-		{
-			/*
-			if (Reload + 200 < GetTickCount64())
+			if (Reload + 500 < GetTickCount64())
 			{
-				Reload = GetTickCount64();
 				Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
-				//pBridge = ((Bullet*)pObj)->GetBridge(1)->Clone();
+				//((Bullet*)pObj)->SetBridge(((Bullet*)pObj)->GetBridge(0)->Clone());
 				pObj->SetIndex(1);
 				pObj->SetPosition(Info.Position);
-				//((Bullet*)pObj)->SetBridge(pBridge);
-				pObj->SetDirection(ObjectManager::GetInstance()->GetPlayer()->GetPosition());
-				//ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
+				((Bullet*)pObj)->SetShooter(this);
+				pObj->SetDirection(MathManager::GetDirection(Info.Position, ObjectManager::GetInstance()->GetPlayer()->GetPosition()));
+				ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
+				Reload = GetTickCount64();
 			}
-			*/
 		}
+		else if (Index == 2)
+		{			
+			if (Reload + 200 < GetTickCount64())
+			{
+				Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
+				//((Bullet*)pObj)->SetBridge(((Bullet*)pObj)->GetBridge(2)->Clone());
+				pObj->SetIndex(1);
+				pObj->SetPosition(Info.Position);
+				if (Info.Position.x >= 142)
+					pObj->SetPosition(Info.Position - Vector3(3.0f, 0.0f));
+				else if (Info.Position.x <= 8)
+					pObj->SetPosition(Info.Position + Vector3(3.0f, 0.0f));
+				((Bullet*)pObj)->SetShooter(this);
+				pObj->SetDirection(MathManager::GetDirection(Info.Position, ObjectManager::GetInstance()->GetPlayer()->GetPosition()));
+				ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
+				Reload = GetTickCount64();
+			}
+		}
+		
 	}
 	else
 	{
@@ -109,5 +123,5 @@ void Enemy::Release()
 	{
 		delete pBridge;
 		pBridge = nullptr;
-	}
+	}	
 }

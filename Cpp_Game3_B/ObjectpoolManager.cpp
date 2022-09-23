@@ -106,12 +106,15 @@ void ObjectpoolManager::Render()
 			(*iter2)->Render();
 		}
 	}
+	CursorManager::GetInstance()->WriteBuffer(0, 40, (int)DisableList["Enemy"].size());
+	CursorManager::GetInstance()->WriteBuffer(0, 41, (int)EnableList["Enemy"].size());
+	CursorManager::GetInstance()->WriteBuffer(0, 42, (int)DisableList["Bullet"].size());
+	CursorManager::GetInstance()->WriteBuffer(0, 43, (int)EnableList["Bullet"].size());
 }
 
 list<Object*> ObjectpoolManager::GetList(string _Key)
 {
 	map<string, list<Object*>>::iterator iter =EnableList.find(_Key);
 
-	//if (!iter->second.empty())
 	return iter->second;
 }

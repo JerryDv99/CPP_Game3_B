@@ -2,6 +2,7 @@
 #include "Object.h"
 
 class Bridge;
+class Bullet;
 class Enemy : public Object
 {
 private:

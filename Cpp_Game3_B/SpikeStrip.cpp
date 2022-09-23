@@ -40,9 +40,6 @@ void SpikeStrip::Render()
 {
 	for (int i = 0; i < 6; ++i)
 		CursorManager::GetInstance()->WriteBuffer(Info.Position.x, Info.Position.y - 3 + i, (char*)"X", 3);
-
-	CursorManager::GetInstance()->WriteBuffer(Info.Position.x + 3, Info.Position.y + 3, Info.Position.x, 10);
-	CursorManager::GetInstance()->WriteBuffer(Info.Position.x + 3, Info.Position.y + 4, Info.Position.y, 10);
 }
 
 void SpikeStrip::Release()

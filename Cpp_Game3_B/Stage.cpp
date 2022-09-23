@@ -12,7 +12,7 @@
 #include "Player.h"
 #include "SpikeStrip.h"
 
-Stage::Stage() : Spd(0), Score(0), SkillGauge1(0), SkillGauge2(0)
+Stage::Stage() : Spd(0), Score(0), SkillGauge1(0), SkillGauge2(0), Progress(0)
 {
 	for (int i = 0; i < 8; ++i)
 		Texture[i] = (char*)"";
@@ -29,6 +29,7 @@ void Stage::Start()
 	Score = 0;
 	SkillGauge1 = 0;
 	SkillGauge2 = 0;
+	Progress = 0;
 	Respawn = GetTickCount64();
 
 	Object* pObj = PrototypeManager::GetInstance()->FindObject("Player")->Clone();
@@ -163,7 +164,8 @@ void Stage::Update()
 		}
 		
 	}
-	
+	if (Progress < 200)
+		Progress++;
 	if (SkillGauge2 >= 1000 && dwKey & KEY_T)
 	{
 		SkillGauge2 = 0;
@@ -355,8 +357,16 @@ void Stage::Render()
 	else
 		CursorManager::GetInstance()->WriteBuffer(142, 37, (char*)"T", 8);
 
-	//for (int i = 0; i < 6; ++i)
-		//CursorManager::GetInstance()->WriteBuffer(142, 17 + i, (char*)"X", 3);
+	CursorManager::GetInstance()->WriteBuffer(42, 0, (char*)"스테이지", 11);
+	CursorManager::GetInstance()->WriteBuffer(43, 1, (char*)"진행도", 11);
+
+	CursorManager::GetInstance()->WriteBuffer(75 - strlen("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓") / 2, 0, (char*)"〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
+	CursorManager::GetInstance()->WriteBuffer(75 - strlen("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓") / 2, 1, (char*)"〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
+
+	int Pro = Progress / 10;
+	CursorManager::GetInstance()->WriteBuffer(53 + Pro * 2, 0, (char*)"플레", 9);
+	CursorManager::GetInstance()->WriteBuffer(53 + Pro * 2, 1, (char*)"이어", 12);
+		
 
 }
 
