@@ -24,6 +24,7 @@ public:
 	void AddObject(string _Key);
 	void AddObject(string _Key, Vector3 _Position);
 	Object* GetObj(string _Key);
+	Object* SearchObj(string _Key);
 	void PutEnable(string _Key, Object* _Obj);
 	void Update();
 	void Render();

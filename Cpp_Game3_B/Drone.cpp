@@ -18,7 +18,7 @@ Object* Drone::Start(string _Key)
 {
 	Key = _Key;
 
-	Info.Position = Vector3(138.0f, 3.0f);
+	Info.Position = Vector3(128.0f, 1.0f);
 	Info.Rotation = Vector3(0.0f, 0.0f);
 	Info.Scale = Vector3(8.0f, 4.0f);
 	Info.Direction = Vector3(0.0f, 0.0f);
@@ -26,6 +26,7 @@ Object* Drone::Start(string _Key)
 	Reload = GetTickCount64();
 	B = false;
 	Duration = 0;
+	Index = 0;
 
 	Texture[0] = (char*)"¡Û  ¡Û";
 	Texture[1] = (char*)"  ¡á";
@@ -41,10 +42,11 @@ int Drone::Update()
 {
 	B = !B;
 	Duration++;
+	
 
-	Target = ObjectManager::GetInstance()->GetObj("Enemy");
+	Target = ObjectManager::GetInstance()->SearchObj("Enemy");
 
-	if (Reload + 500 < GetTickCount64() && !Target)
+	if (Reload + 500 < GetTickCount64() && Target)
 	{
 		Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
 		pObj->SetIndex(0);

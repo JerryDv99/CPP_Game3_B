@@ -73,6 +73,18 @@ Object* ObjectpoolManager::GetObj(string _Key)
 	return pObj;
 }
 
+Object* ObjectpoolManager::SearchObj(string _Key)
+{
+	map < string, list<Object*>>::iterator iter = EnableList.find(_Key);
+
+	if (!iter->second.empty())
+	{
+		Object* pObj = iter->second.back();
+		return pObj;
+	}
+	return nullptr;
+}
+
 void ObjectpoolManager::PutEnable(string _Key, Object* _Obj)
 {
 	EnableList[_Key].push_back(_Obj);

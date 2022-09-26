@@ -69,7 +69,7 @@ int Enemy::Update()
 				else if (Info.Position.x <= 8)
 					pObj->SetPosition(Info.Position + Vector3(3.0f, 0.0f));
 				((Bullet*)pObj)->SetShooter(this);
-				pObj->SetDirection(MathManager::GetDirection(Info.Position, ObjectManager::GetInstance()->GetPlayer()->GetPosition()));
+				pObj->SetDirection(MathManager::GetDirection(Info.Position, ObjectManager::GetInstance()->GetPlayer()->GetPosition() + Vector3(0.0f, 1.0f)));
 				ObjectManager::GetInstance()->PutEnable("Bullet", pObj);
 				Reload = GetTickCount64();
 			}

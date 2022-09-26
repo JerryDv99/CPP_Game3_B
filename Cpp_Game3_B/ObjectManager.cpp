@@ -41,6 +41,15 @@ Object* ObjectManager::GetObj(string _Key)
 	return pObj;
 }
 
+Object* ObjectManager::SearchObj(string _Key)
+{
+	Object* pObj = ObjectpoolManager::GetInstance()->SearchObj("Enemy");
+
+	if (pObj)
+		return pObj;
+	return nullptr;
+}
+
 void ObjectManager::PutEnable(string _Key, Object* _Obj)
 {
 	if (ObjectpoolManager::GetInstance()->FindObject(_Key))

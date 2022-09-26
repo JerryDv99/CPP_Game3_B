@@ -23,11 +23,11 @@ int MG::Update(Transform& _Transform)
 {
 	if (pObject)
 	{
-		pObject->SetPosition(pObject->GetPosition() += pObject->GetDirection() * (pObject->GetSpeed() * 2.6f));
+		pObject->SetPosition(pObject->GetPosition() += pObject->GetDirection() * (pObject->GetSpeed() * 2.2f));
 		if (pObject->GetDirection().x * pObject->GetDirection().x >= 1 && (pObject->GetDirection().y >= -0.15 && pObject->GetDirection().y <= 0.15))
-			pObject->SetPosition(pObject->GetPosition() += pObject->GetDirection() * (pObject->GetSpeed() * 3.8f));
+			pObject->SetPosition(pObject->GetPosition() += pObject->GetDirection() * (pObject->GetSpeed() * 3.4f));
 
-		if (!pObject->GetIndex() && ObjectManager::GetInstance()->Collision("Player", pObject))
+		if (pObject->GetIndex() && ObjectManager::GetInstance()->Collision("Player", pObject))
 		{
 			Object* pObj = ObjectManager::GetInstance()->GetPlayer();
 			if (((Player*)ObjectManager::GetInstance()->GetPlayer())->GetArmor())

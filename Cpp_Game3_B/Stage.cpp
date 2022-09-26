@@ -172,7 +172,7 @@ void Stage::Update()
 	{
 		SkillGauge2 = 0;
 		(*(iter + 1))->SetIndex(0);
-		ObjectManager::GetInstance()->AddObject("Drone", Vector3(148, 2));
+		ObjectManager::GetInstance()->AddObject("Drone", Vector3(142, 4));
 	}
 
 	ObjectManager::GetInstance()->Update();
