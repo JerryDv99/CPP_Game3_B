@@ -37,6 +37,7 @@ public:
 	void SetWeight(float _Weight) { Weight = _Weight; }
 	int GetHP() { return HP; }
 	void SetHP(int _HP) { HP = _HP; }
+	void ReduceHP(int _HP) { HP -= _HP; }
 
 	int GetIndex() { return Index; }
 	float GetSpeed() { return Speed; }

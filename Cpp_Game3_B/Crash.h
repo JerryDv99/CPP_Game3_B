@@ -1,19 +1,20 @@
 #pragma once
 #include "Object.h"
 
-class Junk : public Object
+class Crash : public Object
 {
 private:
-	char* Texture[4];
+	char* Texture[8];
+	int Count;
 public:
 	virtual Object* Start(string _Key)override;
 	virtual int Update()override;
 	virtual void Render()override;
 	virtual void Release()override;
-	virtual Object* Clone()override { return new Junk(*this); }
+	virtual Object* Clone()override { return new Crash(*this); }
 public:
-	Junk();
-	Junk(Transform _Info) : Object(_Info) {};
-	virtual ~Junk();
+	Crash();
+	Crash(Transform _Info) : Object(_Info) {};
+	virtual ~Crash();
 };
 

@@ -23,9 +23,9 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Citizen.cpp" />
+    <ClCompile Include="Crash.cpp" />
     <ClCompile Include="CursorManager.cpp" />
     <ClCompile Include="Drone.cpp" />
-    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyCar.cpp" />
     <ClCompile Include="EnemyTruck.cpp" />
@@ -63,9 +63,9 @@
     <ClInclude Include="Citizen.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="Crash.h" />
     <ClInclude Include="CursorManager.h" />
     <ClInclude Include="Drone.h" />
-    <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBridge.h" />
     <ClInclude Include="EnemyCar.h" />

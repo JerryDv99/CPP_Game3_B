@@ -30,6 +30,7 @@ public:
 	void Release();
 	bool Collision(string _C, string _T);
 	bool Collision(string _C, Object* _Obj);
+	bool Collision(Object* _Obj, string _T);
 	Object* GetCollObj(string _C, Object* _Obj);
 private:
 	ObjectManager();

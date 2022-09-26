@@ -9,6 +9,7 @@
 #include "BackGround.h"
 #include "ScrollBox.h"
 #include "Skill.h"
+#include "Drone.h"
 #include "Player.h"
 #include "SpikeStrip.h"
 
@@ -143,6 +144,7 @@ void Stage::Update()
 	{
 		SkillGauge1 = 0;
 		(*iter)->SetIndex(0);
+		((Player*)ObjectManager::GetInstance()->GetPlayer())->SetSpike(true);
 		switch ((int)ObjectManager::GetInstance()->GetPlayer()->GetPosition().y)
 		{
 		case 6:
@@ -170,6 +172,7 @@ void Stage::Update()
 	{
 		SkillGauge2 = 0;
 		(*(iter + 1))->SetIndex(0);
+		ObjectManager::GetInstance()->AddObject("Drone", Vector3(148, 2));
 	}
 
 	ObjectManager::GetInstance()->Update();

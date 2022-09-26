@@ -219,9 +219,6 @@
     <ClCompile Include="Citizen.cpp">
       <Filter>소스 파일\1.Object\Non-PB\Citizen</Filter>
     </ClCompile>
-    <ClCompile Include="Effect.cpp">
-      <Filter>소스 파일\1.Object\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\1.Object\Item</Filter>
     </ClCompile>
@@ -260,6 +257,9 @@
     </ClCompile>
     <ClCompile Include="Drone.cpp">
       <Filter>소스 파일\1.Object\Skill\Drone</Filter>
+    </ClCompile>
+    <ClCompile Include="Crash.cpp">
+      <Filter>소스 파일\1.Object\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -332,9 +332,6 @@
     <ClInclude Include="Citizen.h">
       <Filter>소스 파일\1.Object\Non-PB\Citizen</Filter>
     </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>소스 파일\1.Object\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>소스 파일\1.Object\Item</Filter>
     </ClInclude>
@@ -388,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>소스 파일\1.Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Crash.h">
+      <Filter>소스 파일\1.Object\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

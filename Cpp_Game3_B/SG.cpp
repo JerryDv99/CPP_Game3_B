@@ -1,5 +1,6 @@
 #include "SG.h"
 #include "Bullet.h"
+#include "Player.h"
 #include "CursorManager.h"
 #include "ObjectManager.h"
 
@@ -28,7 +29,11 @@ int SG::Update(Transform& _Transform)
 		{
 			Object* pObj = ObjectManager::GetInstance()->GetCollObj("Enemy", pObject);
 
-			pObj->SetHP(pObj->GetHP() - 80);
+			if(((Player*)ObjectManager::GetInstance()->GetPlayer())->GetBuff() == 2)
+				pObj->ReduceHP(60);
+			else
+				pObj->ReduceHP(40);
+			
 			return 1;
 		}
 	}	

@@ -1,5 +1,8 @@
 #include "MG.h"
 #include "Bullet.h"
+#include "Player.h"
+#include "Object.h"
+#include "ObjectManager.h"
 #include "CursorManager.h"
 #include "ObjectManager.h"
 
@@ -27,7 +30,10 @@ int MG::Update(Transform& _Transform)
 		if (!pObject->GetIndex() && ObjectManager::GetInstance()->Collision("Player", pObject))
 		{
 			Object* pObj = ObjectManager::GetInstance()->GetPlayer();
-			pObj->SetHP((pObj->GetHP()) - 20);
+			if (((Player*)ObjectManager::GetInstance()->GetPlayer())->GetArmor())
+				((Player*)pObj)->ReduceArmor(5);
+			else
+				pObj->ReduceHP(5);
 			return 1;
 		}
 	}

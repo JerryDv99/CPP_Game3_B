@@ -1,6 +1,9 @@
 #include "Enemy.h"
 #include "Bridge.h"
 #include "Bullet.h"
+#include "Junk.h"
+#include "Crash.h"
+#include "Item.h"
 #include "EnemyCar.h"
 #include "EnemyTruck.h"
 #include "CursorManager.h"
@@ -46,7 +49,6 @@ int Enemy::Update()
 			if (Reload + 500 < GetTickCount64())
 			{
 				Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
-				//((Bullet*)pObj)->SetBridge(((Bullet*)pObj)->GetBridge(0)->Clone());
 				pObj->SetIndex(1);
 				pObj->SetPosition(Info.Position);
 				((Bullet*)pObj)->SetShooter(this);
@@ -60,7 +62,6 @@ int Enemy::Update()
 			if (Reload + 200 < GetTickCount64())
 			{
 				Object* pObj = ObjectManager::GetInstance()->GetObj("Bullet");
-				//((Bullet*)pObj)->SetBridge(((Bullet*)pObj)->GetBridge(2)->Clone());
 				pObj->SetIndex(1);
 				pObj->SetPosition(Info.Position);
 				if (Info.Position.x >= 142)
@@ -87,7 +88,7 @@ int Enemy::Update()
 			Index = 1;
 			Weight = 1.5f;
 			HP = 50;
-			//break;
+			break;
 		case 2:
 			pBridge = BridgeList[EnemyID_Truck]->Clone();
 			Info.Scale = Vector3(16.0f, 3.0f);
@@ -100,10 +101,23 @@ int Enemy::Update()
 		pBridge->SetObject(this);
 	}
 
-	
 
-	if (Info.Position.x - Info.Scale.x / 2 <= 1 || Info.Position.x + Info.Scale.x / 2 >= 150 || HP <= 0)
+	if (Info.Position.x - Info.Scale.x / 2 <= 1 || Info.Position.x + Info.Scale.x / 2 >= 150 || HP <= 0 || ObjectManager::GetInstance()->Collision(this, "SpikeStrip"))
 	{
+		srand(Time * Reload);
+		ObjectManager::GetInstance()->AddObject("Crash", Info.Position);
+
+		switch (rand() % 3)
+		{
+		case 0:
+		case 1:
+			ObjectManager::GetInstance()->AddObject("Junk", Info.Position);
+			break;
+		case 2:
+			ObjectManager::GetInstance()->AddObject("Item", Info.Position);
+			break;
+		}
+		
 		Release();
 		return 1;
 	}

@@ -3,6 +3,10 @@
 #include"Player.h"
 #include"Enemy.h"
 #include"Bullet.h"
+#include"Crash.h"
+#include"Junk.h"
+#include"Item.h"
+#include"Drone.h"
 #include"BackGround.h"
 #include"SpikeStrip.h"
 
@@ -41,6 +45,18 @@ void PrototypeManager::Initialize()
 
 	Key = "SpikeStrip";
 	ObjectList[Key] = (new SpikeStrip(Info))->Start(Key);
+
+	Key = "Junk";
+	ObjectList[Key] = (new Junk(Info))->Start(Key);
+	
+	Key = "Crash";
+	ObjectList[Key] = (new Crash(Info))->Start(Key);
+
+	Key = "Item";
+	ObjectList[Key] = (new Item(Info))->Start(Key);
+
+	Key = "Drone";
+	ObjectList[Key] = (new Drone(Info))->Start(Key);
 }
 
 Object* PrototypeManager::FindObject(string _Key)

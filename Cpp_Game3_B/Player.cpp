@@ -6,7 +6,7 @@
 #include "ObjectManager.h"
 #include "InputManager.h"
 
-Player::Player() :  Temp(false)
+Player::Player() : Temp(false), Spike(false), BuffTime(0), Buff(0), Armor(false), PowerUp(false)
 {
 	for (int i = 0; i < 8; ++i)
 		Texture[i] = "";
@@ -32,7 +32,11 @@ Object* Player::Start(string _Key)
 	Weight = 1.9f;
 	Delay = GetTickCount64();
 	Reload = GetTickCount64();
-	Index = 1;
+	BuffTime = GetTickCount64();
+	Buff = 0;
+	Armor = 0;
+	Spike = false;
+	PowerUp = false;
 
 	Texture[0] = "   __*_";
 	Texture[1] = "¦£\"LSPD`¦¡¦¤";
@@ -158,20 +162,30 @@ int Player::Update()
 		}
 	}
 
-	if (dwKey & KEY_UP && Delay + 100 < GetTickCount64())
+	if (dwKey & KEY_UP && Delay + 100 < GetTickCount64() && !Index)
 	{
 		Delay = GetTickCount64();
 		if (Info.Position.y > 6)
 			Info.Position.y -= 7;
 	}
-
-	if (dwKey & KEY_DOWN && Delay + 100 < GetTickCount64())
+	else if (dwKey & KEY_UP && Delay + 200 < GetTickCount64() && Index)
+	{
+		Delay = GetTickCount64();
+		if (Info.Position.y > 6)
+			Info.Position.y -= 7;
+	}
+	if (dwKey & KEY_DOWN && Delay + 100 < GetTickCount64() && !Index)
 	{
 		Delay = GetTickCount64();
 		if (Info.Position.y < 27)
 		Info.Position.y += 7;
 	}
-
+	else if (dwKey & KEY_DOWN && Delay + 200 < GetTickCount64() && Index)
+	{
+		Delay = GetTickCount64();
+		if (Info.Position.y < 27)
+			Info.Position.y += 7;
+	}
 	if (dwKey & KEY_LEFT)
 	{
 		if (Index)
@@ -194,6 +208,32 @@ int Player::Update()
 		}
 	}
 
+	if (Buff)
+	{
+		switch (Buff)
+		{
+		case 1:
+			Armor += 100;
+			Buff = 0;
+			break;
+		case 2:
+			PowerUp = true;
+			Buff = 0;
+			break;
+		case 3:
+			HP += 50;
+			Buff = 0;
+			break;
+		}
+	}
+
+	if (HP > 100 && !Index)
+		HP = 100;
+	if (HP > 200 && Index)
+		HP = 200;
+
+	if (PowerUp && BuffTime + 15000 < GetTickCount64())
+		PowerUp = false;
 
 	if (dwKey & KEY_RIGHT)
 	{
@@ -215,10 +255,15 @@ int Player::Update()
 		}		
 	}
 
-	if (ObjectManager::GetInstance()->Collision("Player", "SpikeStrip"))
+	if (ObjectManager::GetInstance()->Collision("Player", "SpikeStrip") && Spike)
 	{
-		HP -= 10;
+		Spike = false;
+
+		HP -= 50;
 	}
+
+	if (ObjectManager::GetInstance()->Collision("Player", "Item"))
+		BuffTime = GetTickCount64();
 
 	return 0;
 }
@@ -230,9 +275,18 @@ void Player::Render()
 
 	if (!Index)
 	{
-		CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 1, Texture[0]);
-		CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y, Texture[1]);
-		CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y + 1, Texture[2]);
+		if (!Armor)
+		{
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 1, Texture[0]);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y, Texture[1]);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y + 1, Texture[2]);
+		}
+		else
+		{
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 1, Texture[0], 3);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y, Texture[1], 3);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y + 1, Texture[2], 3);
+		}
 		if (Temp)
 			CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 5, Info.Position.y - 1, "*", 12);
 		if(!Temp)
@@ -240,14 +294,25 @@ void Player::Render()
 	}
 	if (Index)
 	{
-		CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 2, Texture[3]);
-		CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 1, Texture[4]);
-		CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y, Texture[5]);
-		CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y + 1, Texture[6]);
+		if (!Armor)
+		{
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 2, Texture[3]);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 1, Texture[4]);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y, Texture[5]);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y + 1, Texture[6]);
+		}
+		
+		else if (Armor)
+		{
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 2, Texture[3], 3);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y - 1, Texture[4], 3);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y, Texture[5], 3);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x, Info.Position.y + 1, Texture[6], 3);
+		}
 		if (Temp)
 			CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 10, Info.Position.y - 2, "**", 12);
 		if (!Temp)
-			CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 10, Info.Position.y - 2, "**", 9);
+			CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 10, Info.Position.y - 2, "**", 9);		
 	}
 }
 

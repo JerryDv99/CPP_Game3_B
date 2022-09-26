@@ -4,6 +4,9 @@
 class Drone : public Object
 {
 private:
+	char* Texture[8];
+	bool B;
+	int Duration;
 	ULONGLONG Reload;
 public:
 	virtual Object* Start(string _Key)override;

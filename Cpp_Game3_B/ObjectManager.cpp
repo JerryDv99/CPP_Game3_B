@@ -153,3 +153,21 @@ bool ObjectManager::Collision(string _C, Object* _Obj)
 	
 	return false;
 }
+
+bool ObjectManager::Collision(Object* _Obj, string _T)
+{
+	if (ObjectpoolManager::GetInstance()->FindObject(_T))
+	{
+		list<Object*> iter = ObjectpoolManager::GetInstance()->GetList(_T);
+		if (!iter.empty())
+		{
+			auto iterT = iter.begin();
+			for (iterT; iterT != iter.end(); ++iterT)
+			{
+				if (CollisionManager::RectCollision(_Obj->GetTransform(), (*iterT)->GetTransform()))
+					return true;
+			}
+		}
+	}
+	return false;
+}

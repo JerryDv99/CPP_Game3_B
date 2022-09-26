@@ -86,8 +86,10 @@ void ObjectpoolManager::Update()
 		{
 			int Result = (*iter2)->Update();
 
+			Vector3 Pos = (*iter2)->GetPosition();
+
 			if (Result)
-			{
+			{				
 				DisableList[(*iter2)->GetKey()].push_back(*iter2);
 				iter2 = iter->second.erase(iter2);
 			}
