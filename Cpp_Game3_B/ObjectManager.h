@@ -33,6 +33,7 @@ public:
 	bool Collision(string _C, Object* _Obj);
 	bool Collision(Object* _Obj, string _T);
 	Object* GetCollObj(string _C, Object* _Obj);
+	Object* GetCollObj(string _C, string _T);
 private:
 	ObjectManager();
 public:

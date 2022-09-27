@@ -13,10 +13,16 @@
 #include "Player.h"
 #include "SpikeStrip.h"
 
-Stage::Stage() : Spd(0), Score(0), SkillGauge1(0), SkillGauge2(0), Progress(0)
+Stage::Stage() : Spd(0), Score(0), SkillGauge1(0), SkillGauge2(0), Progress(0), PHP(0)
 {
 	for (int i = 0; i < 8; ++i)
 		Texture[i] = (char*)"";
+	for (int i = 0; i < 16; ++i)
+		SBox[i] = (char*)"";
+	for (int i = 0; i < 8; ++i)
+		StatusTexture[i] = (char*)"";
+	for (int i = 0; i < 8; ++i)
+		StatusTexture2[i] = (char*)"";
 }
 
 Stage::~Stage()
@@ -31,6 +37,7 @@ void Stage::Start()
 	SkillGauge1 = 0;
 	SkillGauge2 = 0;
 	Progress = 0;
+	PHP = 0;
 	Respawn = GetTickCount64();
 
 	Object* pObj = PrototypeManager::GetInstance()->FindObject("Player")->Clone();
@@ -41,6 +48,21 @@ void Stage::Start()
 	
 	if (pBG != nullptr)
 		ObjectManager::GetInstance()->SetBG(pBG);
+
+	SBox[0] = (char*)"┌───────────────────────────────────┐";
+	SBox[1] = (char*)"│                                                                      │";
+	SBox[2] = (char*)"│                                                                      │";
+	SBox[3] = (char*)"│                                                                      │";
+	SBox[4] = (char*)"│                                                                      │";
+	SBox[5] = (char*)"│                                                                      │";
+	SBox[6] = (char*)"│                                                                      │";
+	SBox[7] = (char*)"│                                                                      │";
+	SBox[8] = (char*)"│                                                                      │";
+	SBox[9] = (char*)"│                                                                      │";
+	SBox[10] = (char*)"│                                                                      │";
+	SBox[11] = (char*)"│                                                                      │";
+	SBox[12] = (char*)"└───────────────────────────────────┘";
+
 
 	char* Texture[Max][4] = {
 		{
@@ -57,6 +79,28 @@ void Stage::Start()
 			(char*)"SUPPORT",
 		}
 	};
+
+	StatusTexture[0] = (char*)"                        :}L}!";
+	StatusTexture[1] = (char*)"                  *YVXKKZ#QbZd9EgMIL";
+	StatusTexture[2] = (char*)"              ,}m03^^^YK9@q}vryPd3R#BB8M}))rr_";
+	StatusTexture[3] = (char*)"  `!)xTyIGdDgx**<;=!!!Yv~!,_----=r_Q###@@@@@@#B^";
+	StatusTexture[4] = (char*)"-PI#@@##@@#Dg-.-:GoxjoLm:P}hyuoz-_L@###@@@@##@@B*";
+	StatusTexture[5] = (char*)"^#B@BQBB#Q@@#:..:#YxddUETg30oK9X-6BB#@B8#@@####@x";
+	StatusTexture[6] = (char*)" X##0@#Q###@@Hrr*****rrr)rrr))))V@g@#Q@#O8#BQ80e";
+	StatusTexture[7] = (char*)"    :X68ZXZT                    *Pdm90My`";
+	
+	StatusTexture2[0] = (char*)"   ....:*********...:VVVV*";
+	StatusTexture2[1] = (char*)"*VVVVVVFMMMMMMMMIVVVIMIMMIVVV:";
+	StatusTexture2[2] = (char*)"*IMMMMMMFIIIIMMMMMMIIIIIMMMMIIV:.::";
+	StatusTexture2[3] = (char*)"*IIIIIIIIIIFFFIIIFIFFFFIMMMNNIIFVV*";
+	StatusTexture2[4] = (char*)"*IIIIIIIIIIFFFIFIFFFFFFIFIIIIFIFIIFV***:";
+	StatusTexture2[5] = (char*)"*IIFFIIVVVVVVVFIIIIFFFIIFIIIIIIFIIIIIIIIIFV*";
+	StatusTexture2[6] = (char*)"*IIFFFIMNNNNNNMIIIIFFFIIFFFFFIIFIMMNNNNNMMI*V:";
+	StatusTexture2[7] = (char*)"*IIIIIMN$NMMMNNNIIIIIIIMIIIIIIMIIMNNMMMNNMVVM:";
+	StatusTexture2[8] = (char*)":****VVF$IN$INNVVVVVVVVVVVVVVVVV**$MM$MM$*..*.";
+	StatusTexture2[9] = (char*)"       :VNNMNM*                   *MNMNM*";
+	StatusTexture2[10] = (char*)"        ------                     ----";
+
 
 	for (int i = 0; i < Max; ++i)
 	{
@@ -78,7 +122,7 @@ void Stage::Update()
 	vector<Object*>::iterator iter = pSkillList.begin();
 	DWORD dwKey = InputManager::GetInstance()->GetKey();
 	Spd = ((int)((Player*)ObjectManager::GetInstance()->GetPlayer())->GetSpeed());
-
+	PHP = ObjectManager::GetInstance()->GetPlayer()->GetHP();
 	for (vector<Object*>::iterator iter = pSkillList.begin(); iter != pSkillList.end(); ++iter)
 		(*iter)->Update();
 
@@ -166,7 +210,7 @@ void Stage::Update()
 		}
 		
 	}
-	if (Progress < 200)
+	if (Progress < 2000)
 		Progress++;
 	if (SkillGauge2 >= 1000 && dwKey & KEY_T)
 	{
@@ -174,7 +218,7 @@ void Stage::Update()
 		(*(iter + 1))->SetIndex(0);
 		ObjectManager::GetInstance()->AddObject("Drone", Vector3(142, 4));
 	}
-
+	
 	ObjectManager::GetInstance()->Update();
 }
 
@@ -366,11 +410,93 @@ void Stage::Render()
 	CursorManager::GetInstance()->WriteBuffer(75 - strlen("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓") / 2, 0, (char*)"〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
 	CursorManager::GetInstance()->WriteBuffer(75 - strlen("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓") / 2, 1, (char*)"〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
 
-	int Pro = Progress / 10;
+	int Pro = Progress / 100;
 	CursorManager::GetInstance()->WriteBuffer(53 + Pro * 2, 0, (char*)"플레", 9);
 	CursorManager::GetInstance()->WriteBuffer(53 + Pro * 2, 1, (char*)"이어", 12);
-		
+	
+	for (int i = 0; i < 13; ++i)
+		CursorManager::GetInstance()->WriteBuffer(30, 31 + i, SBox[i], PHP == ObjectManager::GetInstance()->GetPlayer()->GetHP() ? 15 : 12);
 
+
+	if (!ObjectManager::GetInstance()->GetPlayer()->GetIndex())
+	{
+		for(int i = 0; i < 8; ++i)
+			CursorManager::GetInstance()->WriteBuffer(44, 33 + i, StatusTexture[i]);
+
+		if (PHP <= 90)
+		{
+			CursorManager::GetInstance()->WriteBuffer(44, 35, (char*)"              ,}m03", 12);
+			CursorManager::GetInstance()->WriteBuffer(44, 36, (char*)"  `!)xTyIGdDgx**", 12);
+		}
+
+		if (PHP <= 80)
+		{
+			CursorManager::GetInstance()->WriteBuffer(76, 39, (char*)"V@g@#Q@#", 12);
+			CursorManager::GetInstance()->WriteBuffer(76, 40, (char*)"*Pdm90My`", 12);
+		}
+
+		if (PHP <= 70)
+		{
+			CursorManager::GetInstance()->WriteBuffer(44, 37, (char*)"-PI#@@##@@#Dg", 12);
+			CursorManager::GetInstance()->WriteBuffer(44, 38, (char*)"^#B@BQBB", 12);
+			CursorManager::GetInstance()->WriteBuffer(57, 39, (char*)"Hrr*****rrr)", 12);
+		}
+		
+		if (PHP <= 60)
+		{
+			CursorManager::GetInstance()->WriteBuffer(76, 38, (char*)"-6BB#@B8#@@####@x", 12);
+			CursorManager::GetInstance()->WriteBuffer(57, 39, (char*)"Hrr*****rrr)rrr))))V@g@#Q@#O8#BQ80e", 12);
+		}
+		
+		if (PHP <= 50)
+		{
+			CursorManager::GetInstance()->WriteBuffer(44, 33, (char*)"                        :}L}!", 12);
+			CursorManager::GetInstance()->WriteBuffer(44, 34, (char*)"                  *YVXKKZ#QbZd9", 12);
+			CursorManager::GetInstance()->WriteBuffer(80, 37, (char*)"###@@@@##@@B*", 12);
+		}
+		
+		if (PHP <= 40)
+		{
+			CursorManager::GetInstance()->WriteBuffer(61, 37, (char*)"GoxjoLm:P}h", 12);
+			CursorManager::GetInstance()->WriteBuffer(60, 38, (char*)":#YxddUETg30", 12);
+		}
+		
+		if (PHP <= 30)
+		{
+			CursorManager::GetInstance()->WriteBuffer(44, 39, (char*)" X##0@#Q###", 12);
+			CursorManager::GetInstance()->WriteBuffer(44, 40, (char*)"    :X68ZXZT", 12);
+			CursorManager::GetInstance()->WriteBuffer(34, 32, (char*)"D A N G E R ! !", 12);
+		}
+
+		if (PHP <= 20)
+		{
+			CursorManager::GetInstance()->WriteBuffer(44, 34, (char*)"                  *YVXKKZ#QbZd9EgMIL", 12);
+			CursorManager::GetInstance()->WriteBuffer(70, 35, (char*)"q}vryPd3R#BB8", 12);
+			CursorManager::GetInstance()->WriteBuffer(63, 36, (char*)"!!!Yv~!,_----=r", 12);
+		}
+		
+		if (PHP <= 10)
+		{
+			CursorManager::GetInstance()->WriteBuffer(63, 36, (char*)"!!!Yv~!,_----=r_Q###@@@", 12);
+			CursorManager::GetInstance()->WriteBuffer(44, 38, (char*)"^#B@BQBB#Q@@#:..:#YxddUETg30oK9X-6BB#@B8#@@####@x", 12);
+			CursorManager::GetInstance()->WriteBuffer(44, 39, (char*)" X##0@#Q###@@Hrr*****rrr)rrr))))V@g@#Q@#O8#BQ80e", 12);
+		}
+
+		
+		if (((Player*)ObjectManager::GetInstance()->GetPlayer())->GetArmor())
+			for (int i = 0; i < 8; ++i)
+				CursorManager::GetInstance()->WriteBuffer(44, 33 + i, StatusTexture[i], 9);
+	}
+	else if (ObjectManager::GetInstance()->GetPlayer()->GetIndex())
+	{
+		for (int i = 0; i < 11; ++i)
+			CursorManager::GetInstance()->WriteBuffer(46, 32 + i, StatusTexture2[i]);
+
+
+		if (((Player*)ObjectManager::GetInstance()->GetPlayer())->GetArmor())
+			for (int i = 0; i < 8; ++i)
+				CursorManager::GetInstance()->WriteBuffer(46, 32 + i, StatusTexture2[i], 9);
+	}
 }
 
 void Stage::Release()

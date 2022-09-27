@@ -37,7 +37,7 @@ Object* Player::Start(string _Key)
 	Armor = 0;
 	Spike = false;
 	PowerUp = false;
-
+	//Index = 1;
 	Texture[0] = "   __*_";
 	Texture[1] = "¦£\"LSPD`¦¡¦¤";
 	Texture[2] = "¦¦£ï¦¡¦¡£ï¦¥";
@@ -258,7 +258,6 @@ int Player::Update()
 	if (ObjectManager::GetInstance()->Collision("Player", "SpikeStrip") && Spike)
 	{
 		Spike = false;
-
 		HP -= 50;
 	}
 
