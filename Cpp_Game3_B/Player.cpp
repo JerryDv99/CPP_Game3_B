@@ -27,7 +27,10 @@ Object* Player::Start(string _Key)
 
 	Target = nullptr;
 
-	HP = 100;
+	Index = 1;
+	HP = 200;
+	if (Index)
+		HP = 400;
 	Speed = 70.0f;
 	Weight = 1.9f;
 	Delay = GetTickCount64();
@@ -37,7 +40,7 @@ Object* Player::Start(string _Key)
 	Armor = 0;
 	Spike = false;
 	PowerUp = false;
-	//Index = 1;
+	
 	Texture[0] = "   __*_";
 	Texture[1] = "¦£\"LSPD`¦¡¦¤";
 	Texture[2] = "¦¦£ï¦¡¦¡£ï¦¥";
@@ -227,10 +230,10 @@ int Player::Update()
 		}
 	}
 
-	if (HP > 100 && !Index)
-		HP = 100;
-	if (HP > 200 && Index)
+	if (HP > 200 && !Index)
 		HP = 200;
+	if (HP > 400 && Index)
+		HP = 400;
 
 	if (PowerUp && BuffTime + 15000 < GetTickCount64())
 		PowerUp = false;
@@ -270,7 +273,6 @@ int Player::Update()
 void Player::Render()
 {
 	Vector3 StartPoint = Info.Position - Info.Scale / 2;
-	CursorManager::GetInstance()->WriteBuffer(StartPoint.x + 5, Info.Position.y - 3, HP);
 
 	if (!Index)
 	{

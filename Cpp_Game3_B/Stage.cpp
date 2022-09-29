@@ -99,7 +99,7 @@ void Stage::Start()
 	StatusTexture2[7] = (char*)"*IIIIIMN$NMMMNNNIIIIIIIMIIIIIIMIIMNNMMMNNMVVM:";
 	StatusTexture2[8] = (char*)":****VVF$IN$INNVVVVVVVVVVVVVVVVV**$MM$MM$*..*.";
 	StatusTexture2[9] = (char*)"       :VNNMNM*                   *MNMNM*";
-	StatusTexture2[10] = (char*)"        ------                     ----";
+	StatusTexture2[10] = (char*)"         *****                     ****";
 
 
 	for (int i = 0; i < Max; ++i)
@@ -210,7 +210,7 @@ void Stage::Update()
 		}
 		
 	}
-	if (Progress < 2000)
+	if (Progress < 4000)
 		Progress++;
 	if (SkillGauge2 >= 1000 && dwKey & KEY_T)
 	{
@@ -410,7 +410,7 @@ void Stage::Render()
 	CursorManager::GetInstance()->WriteBuffer(75 - strlen("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓") / 2, 0, (char*)"〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
 	CursorManager::GetInstance()->WriteBuffer(75 - strlen("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓") / 2, 1, (char*)"〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
 
-	int Pro = Progress / 100;
+	int Pro = Progress / 200;
 	CursorManager::GetInstance()->WriteBuffer(53 + Pro * 2, 0, (char*)"플레", 9);
 	CursorManager::GetInstance()->WriteBuffer(53 + Pro * 2, 1, (char*)"이어", 12);
 	
@@ -421,61 +421,61 @@ void Stage::Render()
 	if (!ObjectManager::GetInstance()->GetPlayer()->GetIndex())
 	{
 		for(int i = 0; i < 8; ++i)
-			CursorManager::GetInstance()->WriteBuffer(44, 33 + i, StatusTexture[i]);
+			CursorManager::GetInstance()->WriteBuffer(44, 33 + i, StatusTexture[i], 10);
 
-		if (PHP <= 90)
+		if (PHP <= 180)
 		{
 			CursorManager::GetInstance()->WriteBuffer(44, 35, (char*)"              ,}m03", 12);
 			CursorManager::GetInstance()->WriteBuffer(44, 36, (char*)"  `!)xTyIGdDgx**", 12);
 		}
 
-		if (PHP <= 80)
+		if (PHP <= 160)
 		{
 			CursorManager::GetInstance()->WriteBuffer(76, 39, (char*)"V@g@#Q@#", 12);
 			CursorManager::GetInstance()->WriteBuffer(76, 40, (char*)"*Pdm90My`", 12);
 		}
 
-		if (PHP <= 70)
+		if (PHP <= 140)
 		{
 			CursorManager::GetInstance()->WriteBuffer(44, 37, (char*)"-PI#@@##@@#Dg", 12);
 			CursorManager::GetInstance()->WriteBuffer(44, 38, (char*)"^#B@BQBB", 12);
 			CursorManager::GetInstance()->WriteBuffer(57, 39, (char*)"Hrr*****rrr)", 12);
 		}
 		
-		if (PHP <= 60)
+		if (PHP <= 120)
 		{
 			CursorManager::GetInstance()->WriteBuffer(76, 38, (char*)"-6BB#@B8#@@####@x", 12);
 			CursorManager::GetInstance()->WriteBuffer(57, 39, (char*)"Hrr*****rrr)rrr))))V@g@#Q@#O8#BQ80e", 12);
 		}
 		
-		if (PHP <= 50)
+		if (PHP <= 100)
 		{
 			CursorManager::GetInstance()->WriteBuffer(44, 33, (char*)"                        :}L}!", 12);
 			CursorManager::GetInstance()->WriteBuffer(44, 34, (char*)"                  *YVXKKZ#QbZd9", 12);
 			CursorManager::GetInstance()->WriteBuffer(80, 37, (char*)"###@@@@##@@B*", 12);
 		}
 		
-		if (PHP <= 40)
+		if (PHP <= 80)
 		{
 			CursorManager::GetInstance()->WriteBuffer(61, 37, (char*)"GoxjoLm:P}h", 12);
 			CursorManager::GetInstance()->WriteBuffer(60, 38, (char*)":#YxddUETg30", 12);
 		}
 		
-		if (PHP <= 30)
+		if (PHP <= 60)
 		{
 			CursorManager::GetInstance()->WriteBuffer(44, 39, (char*)" X##0@#Q###", 12);
 			CursorManager::GetInstance()->WriteBuffer(44, 40, (char*)"    :X68ZXZT", 12);
-			CursorManager::GetInstance()->WriteBuffer(34, 32, (char*)"D A N G E R ! !", 12);
+			CursorManager::GetInstance()->WriteBuffer(32, 32, (char*)"D A N G E R ! !", 12);
 		}
 
-		if (PHP <= 20)
+		if (PHP <= 40)
 		{
 			CursorManager::GetInstance()->WriteBuffer(44, 34, (char*)"                  *YVXKKZ#QbZd9EgMIL", 12);
 			CursorManager::GetInstance()->WriteBuffer(70, 35, (char*)"q}vryPd3R#BB8", 12);
 			CursorManager::GetInstance()->WriteBuffer(63, 36, (char*)"!!!Yv~!,_----=r", 12);
 		}
 		
-		if (PHP <= 10)
+		if (PHP <= 20)
 		{
 			CursorManager::GetInstance()->WriteBuffer(63, 36, (char*)"!!!Yv~!,_----=r_Q###@@@", 12);
 			CursorManager::GetInstance()->WriteBuffer(44, 38, (char*)"^#B@BQBB#Q@@#:..:#YxddUETg30oK9X-6BB#@B8#@@####@x", 12);
@@ -484,18 +484,102 @@ void Stage::Render()
 
 		
 		if (((Player*)ObjectManager::GetInstance()->GetPlayer())->GetArmor())
+		{
 			for (int i = 0; i < 8; ++i)
 				CursorManager::GetInstance()->WriteBuffer(44, 33 + i, StatusTexture[i], 9);
+			CursorManager::GetInstance()->WriteBuffer(32, 33, (char*)"A R M O R E D", 9);
+		}		
 	}
 	else if (ObjectManager::GetInstance()->GetPlayer()->GetIndex())
 	{
 		for (int i = 0; i < 11; ++i)
-			CursorManager::GetInstance()->WriteBuffer(46, 32 + i, StatusTexture2[i]);
+			CursorManager::GetInstance()->WriteBuffer(46, 32 + i, StatusTexture2[i], 10);
+
+		if (PHP <= 385)
+			CursorManager::GetInstance()->WriteBuffer(65, 37, (char*)"FFFIIF", 12);
+		if (PHP <= 370)
+			CursorManager::GetInstance()->WriteBuffer(65, 38, (char*)"FFFIIFFF", 12);		
+		if (PHP <= 355)
+			CursorManager::GetInstance()->WriteBuffer(46, 32, (char*)"   ....:**", 12);
+		if (PHP <= 340)
+			CursorManager::GetInstance()->WriteBuffer(46, 33, (char*)"*VVVVVVF", 12);
+		if (PHP <= 325)
+			CursorManager::GetInstance()->WriteBuffer(46, 34, (char*)"*IMMM", 12);
+		if (PHP <= 310)
+			CursorManager::GetInstance()->WriteBuffer(46, 36, (char*)"*IIIIIIII", 12);
+		if (PHP <= 295)
+			CursorManager::GetInstance()->WriteBuffer(46, 37, (char*)"*IIFFII", 12);		
+		if (PHP <= 280)
+			CursorManager::GetInstance()->WriteBuffer(88, 38, (char*)"I*V:", 12);
+		if (PHP <= 265)
+			CursorManager::GetInstance()->WriteBuffer(87, 39, (char*)"MVVM:", 12);
+		if (PHP <= 250)
+			CursorManager::GetInstance()->WriteBuffer(88, 40, (char*)"..*.", 12);
+		if (PHP <= 235)
+			CursorManager::GetInstance()->WriteBuffer(65, 32, (char*)".:VVVV*", 12);
+		if (PHP <= 220)
+			CursorManager::GetInstance()->WriteBuffer(66, 33, (char*)"IMMIVVV", 12);
+		if (PHP <= 205)
+			CursorManager::GetInstance()->WriteBuffer(62, 34, (char*)"MMMIII", 12);
+		if (PHP <= 190)
+			CursorManager::GetInstance()->WriteBuffer(61, 40, (char*)"VVVVVVVVVVVVVVVVVV", 12);
+		if (PHP <= 175)
+			CursorManager::GetInstance()->WriteBuffer(84, 37, (char*)"IIIFV*", 12);
+		if (PHP <= 160)
+			CursorManager::GetInstance()->WriteBuffer(81, 38, (char*)"NNNNNMM", 12);
+		if (PHP <= 145)
+			CursorManager::GetInstance()->WriteBuffer(46, 40, (char*)":****VV", 12);
+		if (PHP <= 130)
+			CursorManager::GetInstance()->WriteBuffer(46, 39, (char*)"*IIIIIMN", 12);
+		if (PHP <= 115)
+			CursorManager::GetInstance()->WriteBuffer(46, 38, (char*)"*IIFFFIMN", 12);
+		if (PHP <= 100)
+			CursorManager::GetInstance()->WriteBuffer(68, 34, (char*)"IIMMMMIIV:.::", 12);
+		if (PHP <= 85)
+			CursorManager::GetInstance()->WriteBuffer(73, 35, (char*)"NNIIFVV*", 12);
+		if (PHP <= 70)
+		{
+			CursorManager::GetInstance()->WriteBuffer(80, 39, (char*)"NNMMMNN", 12);
+			CursorManager::GetInstance()->WriteBuffer(79, 40, (char*)"*$MM$MM$*", 12);
+			CursorManager::GetInstance()->WriteBuffer(80, 41, (char*)"*MNMNM*", 12);
+			CursorManager::GetInstance()->WriteBuffer(81, 42, (char*)"****", 12);
+			CursorManager::GetInstance()->WriteBuffer(32, 32, (char*)"D A N G E R ! !", 12);
+		}
+		if (PHP <= 55)
+		{
+			CursorManager::GetInstance()->WriteBuffer(46, 35, (char*)"*IIIIIIIIIIFF", 12);
+			CursorManager::GetInstance()->WriteBuffer(60, 39, (char*)"NNIIIIIIMIIII", 12);
+		}
+		if (PHP <= 40)
+		{
+			CursorManager::GetInstance()->WriteBuffer(75, 36, (char*)"IFIFIIFV**:", 12);
+			CursorManager::GetInstance()->WriteBuffer(76, 37, (char*)"IIFIIIIII", 12);
+			CursorManager::GetInstance()->WriteBuffer(77, 38, (char*)"IFIMM", 12);
+			CursorManager::GetInstance()->WriteBuffer(76, 39, (char*)"IMIIM", 12);
+		}
+		if (PHP <= 25)
+		{
+			CursorManager::GetInstance()->WriteBuffer(53, 37, (char*)"VVVVV", 12);
+			CursorManager::GetInstance()->WriteBuffer(54, 38, (char*)"NNNNNNMI", 12);
+			CursorManager::GetInstance()->WriteBuffer(56, 32, (char*)"*******..", 12);
+		}
+		if (PHP <= 10)
+		{
+			CursorManager::GetInstance()->WriteBuffer(46, 33, (char*)"*VVVVVVFMMMMMMMMIVVVIMIMMIVVV:", 12);
+			CursorManager::GetInstance()->WriteBuffer(59, 35, (char*)"FIIIFIFFF", 12);
+			CursorManager::GetInstance()->WriteBuffer(55, 36, (char*)"IIFFFIFIFFFF", 12);
+			CursorManager::GetInstance()->WriteBuffer(58, 37, (char*)"VVFIIII", 12);
+			CursorManager::GetInstance()->WriteBuffer(62, 38, (char*)"IIIFFFIIFFFFFII", 12);
+			CursorManager::GetInstance()->WriteBuffer(73, 39, (char*)"III", 12);
+		}
 
 
 		if (((Player*)ObjectManager::GetInstance()->GetPlayer())->GetArmor())
-			for (int i = 0; i < 8; ++i)
+		{
+			for (int i = 0; i < 11; ++i)
 				CursorManager::GetInstance()->WriteBuffer(46, 32 + i, StatusTexture2[i], 9);
+			CursorManager::GetInstance()->WriteBuffer(32, 33, (char*)"A R M O R E D", 9);
+		}			
 	}
 }
 

@@ -1,4 +1,7 @@
 #include "Logo.h"
+#include "SceneManager.h"
+#include "InputManager.h"
+#include "CursorManager.h"
 
 Logo::Logo()
 {

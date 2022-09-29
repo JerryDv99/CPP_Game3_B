@@ -4,7 +4,12 @@
 class Logo : public Scene
 {
 private:
+	int Length;
+	int MaxSize;
+	char* Buffer[32];
 
+	int Color;
+	ULONGLONG Time;
 public:
 	virtual void Start()override;
 	virtual void Update()override;
