@@ -157,6 +157,9 @@
     <Filter Include="소스 파일\1.Object\Non-PB\BackGround">
       <UniqueIdentifier>{d525f341-1f4f-4117-969f-e6b9722b4088}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\2.Scene\Select">
+      <UniqueIdentifier>{5b8f33e0-aa08-4c65-bafe-8382590b2f40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -260,6 +263,9 @@
     </ClCompile>
     <ClCompile Include="Crash.cpp">
       <Filter>소스 파일\1.Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Select.cpp">
+      <Filter>소스 파일\2.Scene\Select</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +394,9 @@
     </ClInclude>
     <ClInclude Include="Crash.h">
       <Filter>소스 파일\1.Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Select.h">
+      <Filter>소스 파일\2.Scene\Select</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

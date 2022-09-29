@@ -27,10 +27,8 @@ Object* Player::Start(string _Key)
 
 	Target = nullptr;
 
-	Index = 1;
 	HP = 200;
-	if (Index)
-		HP = 400;
+	
 	Speed = 70.0f;
 	Weight = 1.9f;
 	Delay = GetTickCount64();

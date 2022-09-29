@@ -47,6 +47,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScrollBox.cpp" />
+    <ClCompile Include="Select.cpp" />
     <ClCompile Include="SG.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="SpikeStrip.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScrollBox.h" />
+    <ClInclude Include="Select.h" />
     <ClInclude Include="SG.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SpikeStrip.h" />

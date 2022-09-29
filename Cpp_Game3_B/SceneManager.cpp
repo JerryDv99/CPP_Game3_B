@@ -2,6 +2,7 @@
 
 #include "Logo.h"
 #include "Menu.h"
+#include "Select.h"
 #include "Stage.h"
 
 SceneManager* SceneManager::Instance = nullptr;
@@ -32,6 +33,10 @@ void SceneManager::SetScene(SCENEID _SceneID)
 		SceneState = new Menu;
 		break;
 	
+	case SCENEID::SELECT:
+		SceneState = new Select;
+		break;
+
 	case SCENEID::STAGE:
 		SceneState = new Stage;
 		break;
