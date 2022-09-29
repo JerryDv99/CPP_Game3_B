@@ -119,7 +119,12 @@ void Select::Render()
 		CursorManager::GetInstance()->WriteBuffer(8, 40, (char*)"│                                                                                                                                  │");
 		CursorManager::GetInstance()->WriteBuffer(8, 41, (char*)"└─────────────────────────────────────────────────────────────────┘");
 
-
+		CursorManager::GetInstance()->WriteBuffer(8, 9, (char*)"조작 :", 14);
+		CursorManager::GetInstance()->WriteBuffer(8, 10, (char*)"W , A, S, D 키는 각각 상, 하, 좌, 우로 이동할때 사용합니다.");
+		CursorManager::GetInstance()->WriteBuffer(8, 11, (char*)"SPACE BAR 키로 총알을 발사할 수 있으며 화살표를 함께 눌러 발사할 방향을 지정할 수 있습니다.");
+		CursorManager::GetInstance()->WriteBuffer(8, 12, (char*)"스킬 게이지가 가득 차면 스킬을 사용할 수 있습니다.");
+		CursorManager::GetInstance()->WriteBuffer(8, 13, (char*)"1스킬 : R키로 발동, 플레이어의 좌, 우 차선에 스파이크 스트립 설치를 요청해 밟는 모든 차량에 큰 피해를 줍니다.");
+		CursorManager::GetInstance()->WriteBuffer(8, 13, (char*)"2스킬 : T키로 발동, 드론 공중지원을 요청합니다. 드론은 일정 시간동안 적을 사격합니다.");
 
 	}
 	if (!Guide)
